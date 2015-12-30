@@ -3,12 +3,12 @@ Basic game written to practice python.
 Player will have a character that moves through rooms and randomly encounters monsters to fight. Possibility of finding equipment in rooms or from dead monsters.
 
 + Classes:
-Player - the character and their information
-Mob - enemies to fight, possibly allies or nuetral characters in the future
-Room - create and manage rooms
-Game - mechanisms to bring the game together
-Items - Equipment for character, healing items, etc
-Skills? - special skills for player
+Player - the character and their information.
+Mob - enemies to fight, possibly allies or nuetral characters in the future.
+Room - create and manage rooms.
+Game - mechanisms to bring the game together.
+Items - Equipment for character, healing items, etc.
+Skills? - special skills for player.
 Combat? - Mechanics for battle between player and mobs. Probably end up as part of Game.
 
 - Player:
