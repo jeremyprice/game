@@ -3,22 +3,25 @@
 
 __author__ = 'alex8955'
 
-from player import player
-from room import room
+import player
+import room
+import random
 
 def enter(room):
+    print ""
     print room.desc
 
+def roll100():
+    return random.randint(0,99)
 
 def main():
     print "Welcome to Pygame."
     print ""
-    char = player()
-    char.create()
+    char = player.player()
 
-    currentRoom = room()
-    currentRoom.startRoom()
+    currentRoom = room.startRoom()
     enter(currentRoom)
+
 
 
 

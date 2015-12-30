@@ -4,6 +4,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 
 + Classes:
 Player - the character and their information.
+Actions -  actions the player can take.
 Mob - enemies to fight, possibly allies or nuetral characters in the future.
 Room - create and manage rooms.
 Game - mechanisms to bring the game together.

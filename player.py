@@ -25,9 +25,12 @@ class player(object):
             roll = self.roll_stats()
         return roll
 
+    def __str__(self):
+        return "Your stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}".format(self.strg, self.agi, self.end, self.hp, self.arm)
 
 
-    def create(self):
+
+    def __init__(self):
         print "Creating character."
         print ""
         self.name = str(raw_input("What is your name, traveler? "))
@@ -70,20 +73,14 @@ class player(object):
         print ""
         print "Hail, {}.".format(self.name)
         print ""
-        print "Your stats are:"
-        print "Strength: {}".format(self.strg)
-        print "Agility: {}".format(self.agi)
-        print "Endurance: {}".format(self.end)
-        print "Hit Points: {}".format(self.hp)
-        print "Armor: {}".format(self.arm)
-        print ""
+        print self
+
 
     #def __enter__(self):
         #self.create()
 
 def main():
     char = player()
-    char.create()
 
 
 if __name__ == "__main__":
