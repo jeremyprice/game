@@ -39,6 +39,9 @@ Generate monster,
 Items,
 Directions to other rooms,
 Room will be linear. A character can choose in which direction they progress. Any direction(forward, left, right, up, down) can have a given difficulty, with some indicator. Once a direction is chosen, the room will generate and the character will start a new encounter.
+Difficulty: Value 0 through 99. To begin with, these with break down into easy (0 - 24), medium (25 - 74), hard (75 - 89), and very hard (90 - 99).
+Chance: Value 0 through 99. Change that a special event will occur in a room. Things such as free healing, automatic damage etc.
+Description: At first, description will randomly pull from a list of prewritten strings. May change this in the future.
 
 - Items:
 Stats

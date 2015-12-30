@@ -29,7 +29,8 @@ class player(object):
 
     def create(self):
         print "Creating character."
-        self.name = str(raw_input("What is your name, traveler?"))
+        print ""
+        self.name = str(raw_input("What is your name, traveler? "))
 
         print "You will have three rolls to choose from."
         print "Rolling stats."
@@ -42,9 +43,9 @@ class player(object):
         print "2) Str: {}, Agi: {}, End: {}".format(roll2['strg'], roll2['agi'], roll2['end'])
         print "3) Str: {}, Agi: {}, End: {}".format(roll3['strg'], roll3['agi'], roll3['end'])
 
-        choice = int(raw_input("Which option will you choose?:"))
+        choice = int(raw_input("Which option will you choose?: "))
         while choice not in (1,2,3):
-            choice = raw_input("Please choose either 1, 2 or 3:")
+            choice = raw_input("Please choose either 1, 2 or 3: ")
 
         if choice == 1:
             self.strg = roll1['strg']
@@ -66,13 +67,16 @@ class player(object):
         else:
             self.arm = (self.agi - 1) / 2
 
+        print ""
         print "Hail, {}.".format(self.name)
+        print ""
         print "Your stats are:"
         print "Strength: {}".format(self.strg)
         print "Agility: {}".format(self.agi)
         print "Endurance: {}".format(self.end)
         print "Hit Points: {}".format(self.hp)
         print "Armor: {}".format(self.arm)
+        print ""
 
     #def __enter__(self):
         #self.create()
