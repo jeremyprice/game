@@ -48,7 +48,7 @@ class player(object):
 
         choice = int(raw_input("Which option will you choose?: "))
         while choice not in (1,2,3):
-            choice = raw_input("Please choose either 1, 2 or 3: ")
+            choice = int(raw_input("Please choose either 1, 2 or 3: "))
 
         if choice == 1:
             self.strg = roll1['strg']

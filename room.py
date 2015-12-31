@@ -4,7 +4,7 @@
 __author__ = 'alex8955'
 
 import random
-import game
+import mechanics
 
 class map(object):
     __str__ = "Base class for generating and managing rooms in pygame."
@@ -19,22 +19,9 @@ class map(object):
         #This is an abstract base class and should not be used directly
         raise NotImplementedError
 
-class room(map):
-
-    def rollDiff(self):
-        diffRoll = game.roll100()
-        #the difficulty will be used to modify monster stats, and perhaps item drops. It uses ranges so that chances can be modified easily and is them bucketed for use.
-        if diffRoll in range(0, 24):
-            return 0
-        elif diffRoll in range(25, 74):
-            return 1
-        elif diffRoll in range(75, 89):
-            return 2
-        else:
-            return 3
 
     def rollChance(self):
-        self.chance = game.roll100()
+        self.chance = mechanics.roll100()
         #scaffold for chance events
         if self.chance in range(0, 25):
             pass
@@ -46,23 +33,22 @@ class room(map):
             pass
             #Some very rare event
 
-    def rollDesc(self):
-        descRoll = random.randint(0, 4)
-        if descRoll == 0:
-            self.desc = "You walk through the door into a stone corridor, dimly lit by a flickering torch on the wall. Filthy water drips from the ceiling, and the walls are cast in shadows."
-        elif descRoll == 1:
-            self.desc = "Description 1"
-        elif descRoll == 2:
-            self.desc = "Description 2"
-        elif descRoll == 3:
-            self.desc = "Description 3"
-        elif descRoll == 4:
-            self.desc = "Description 4"
+
+    def rollDiff(self):
+        diffRoll = mechanics.roll100()
+        #the difficulty will be used to modify monster stats, and perhaps item drops. It uses ranges so that chances can be modified easily and is them bucketed for use.
+        if diffRoll in range(0, 24):
+            return 0
+        elif diffRoll in range(25, 74):
+            return 1
+        elif diffRoll in range(75, 89):
+            return 2
         else:
-            self.desc = "There appears to be a problem generating a description."
+            return 3
+
 
     def rollExits(self):
-        exitsRoll = game.roll100()
+        exitsRoll = mechanics.roll100()
         #exits are bucketed similar to difficulty
         if exitsRoll in range(0, 4):
             return 1
@@ -72,6 +58,7 @@ class room(map):
             return 3
         else:
             return 4
+
 
     def rollNextRooms(self):
         self.door1diff = self.rollDiff()
@@ -93,8 +80,13 @@ class room(map):
         else:
             return "Blood seeps beneath this black stone door, and the sounds of something angry emanate from within."
 
+
     def nextRooms(self, exits):
-        print "This room has {} exits.".format(exits)
+        #displays exits for the next rooms.
+        if exits > 1:
+            print "This room has {} exits.".format(exits)
+        else:
+            print "This room only has 1 exit."
         print "1) {}".format(self.doorDesc(self.door1diff))
         if exits > 1:
             print "2) {}".format(self.doorDesc(self.door2diff))
@@ -103,13 +95,60 @@ class room(map):
         if exits > 3:
             print "4) {}".format(self.doorDesc(self.door4diff))
 
-    def __init__(self):
-        self.difficulty = self.rollDiff()
+    def chooseDoor(self, d1d, d2d, d3d, d4d, exits):
+    #Prompts player for door choice and returns the new room
+        newRoom = None
+        while not newRoom:
+            choice = int(raw_input("Which exit will you take? "))
+            if choice == 1:
+                newRoom = miscRoom(d1d)
+            elif choice == 2:
+                if exits > 1:
+                    newRoom = miscRoom(d2d)
+                else:
+                    print "That is not a valid choice."
+            elif choice == 3:
+                if exits > 2:
+                    newRoom = miscRoom(d3d)
+                else:
+                    print "That is not a valid choice."
+            elif choice == 4:
+                if exits > 3:
+                    newRoom = miscRoom(d4d)
+                else:
+                    print "That is not a valid choice."
+            else:
+                print "That is not a valid choice."
+        return newRoom
+
+
+
+class miscRoom(map):
+
+    def rollDesc(self):
+        descRoll = random.randint(0, 4)
+        if descRoll == 0:
+            self.desc = "You walk through the door into a stone corridor, dimly lit by a flickering torch on the wall. Filthy water drips from the ceiling, and the walls are cast in shadows."
+        elif descRoll == 1:
+            self.desc = "Description 1"
+        elif descRoll == 2:
+            self.desc = "Description 2"
+        elif descRoll == 3:
+            self.desc = "Description 3"
+        elif descRoll == 4:
+            self.desc = "Description 4"
+        else:
+            self.desc = "There appears to be a problem generating a description."
+
+
+    def __init__(self, diff):
+        self.difficulty = diff
         self.rollChance()
         self.rollDesc()
         self.exits = self.rollExits()
         self.rollNextRooms()
-        self.nextRooms(self.exits)
+        pass
+
 
 
 class startRoom(map):
@@ -118,13 +157,14 @@ class startRoom(map):
         self.exits = 1
         self.desc = "You awaken in a cramped stone cell. Your head aches and you have no memory of how you came to be here. There are a few items bundled together in the center of the room, and the door hangs slightly open. You hear the distant sound of creatures in the darkness beyond."
         self.door1diff = 1
+        pass
 
 
 class endRoom(map):
     pass
 
 def main():
-    room1 = room()
+    room1 = miscRoom(1)
 
     print "Room debug info:"
     print "Difficulty - {},".format(room1.difficulty)
@@ -134,7 +174,6 @@ def main():
     print "Door 2 diff: {}".format(room1.door2diff)
     print "Door 3 diff: {}".format(room1.door3diff)
     print "Door 4 diff: {}".format(room1.door4diff)
-    print room1.desc
 
 
 if __name__ == "__main__":

@@ -5,22 +5,25 @@ __author__ = 'alex8955'
 
 import player
 import room
-import random
+
+
 
 def enter(room):
     print ""
     print room.desc
 
-def roll100():
-    return random.randint(0,99)
 
 def main():
+    currentRoom = room.startRoom()
+
     print "Welcome to Pygame."
     print ""
     char = player.player()
 
-    currentRoom = room.startRoom()
-    enter(currentRoom)
+    while char.hp > 0:
+        enter(currentRoom)
+        currentRoom.nextRooms(currentRoom.exits)
+        currentRoom = currentRoom.chooseDoor(currentRoom.door1diff, currentRoom.door2diff, currentRoom.door3diff, currentRoom.door4diff, currentRoom.exits)
 
 
 
