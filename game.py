@@ -21,7 +21,7 @@ def main():
     char = player.player()
 
     while char.hp > 0:
-        enter(currentRoom)
+        currentRoom.enter(currentRoom)
         currentRoom.nextRooms(currentRoom.exits)
         currentRoom = currentRoom.chooseDoor(currentRoom.door1diff, currentRoom.door2diff, currentRoom.door3diff, currentRoom.door4diff, currentRoom.exits)
 

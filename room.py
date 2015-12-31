@@ -5,6 +5,7 @@ __author__ = 'alex8955'
 
 import random
 import mechanics
+import mobs
 
 class map(object):
     __str__ = "Base class for generating and managing rooms in pygame."
@@ -16,7 +17,7 @@ class map(object):
     door1diff = door2diff = door3diff = door4diff = 999
 
     def __init__(self):
-        #This is an abstract base class and should not be used directly
+        "This is an abstract base class and should not be used directly"
         raise NotImplementedError
 
 
@@ -61,6 +62,7 @@ class map(object):
 
 
     def rollNextRooms(self):
+        #Need to change this to treat doorDiffs as an array
         self.door1diff = self.rollDiff()
         while self.door2diff == 999 or self.door2diff == self.door1diff:
             self.door2diff = self.rollDiff()
@@ -121,6 +123,20 @@ class map(object):
                 print "That is not a valid choice."
         return newRoom
 
+    def spawnMob(self, diff):
+        if diff == 0:
+            pass
+        elif diff == 1:
+            pass
+        elif diff == 2:
+            pass
+        else:
+            pass
+
+    def enter(self, room):
+        print ""
+        print room.desc
+
 
 
 class miscRoom(map):
@@ -130,13 +146,13 @@ class miscRoom(map):
         if descRoll == 0:
             self.desc = "You walk through the door into a stone corridor, dimly lit by a flickering torch on the wall. Filthy water drips from the ceiling, and the walls are cast in shadows."
         elif descRoll == 1:
-            self.desc = "Description 1"
+            self.desc = "You enter into a dark room. You can barely make out a partially collapsed wall. The smell of earth fills your nose."
         elif descRoll == 2:
-            self.desc = "Description 2"
+            self.desc = "You walk into a warm room. It appears there was a fire burning here just moments ago."
         elif descRoll == 3:
-            self.desc = "Description 3"
+            self.desc = "You walk through the door into a room strewn with the remains of a bloody battle. Your feet stick to the floor, and your nose is filled with the smell of death."
         elif descRoll == 4:
-            self.desc = "Description 4"
+            self.desc = "Your enter into what appears to have been a great hall, long ago. The room has been heavily looted, but the high ceilings provide a stark contrast to the cramped tunnels you have been traveling."
         else:
             self.desc = "There appears to be a problem generating a description."
 

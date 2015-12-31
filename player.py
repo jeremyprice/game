@@ -6,7 +6,9 @@ __author__ = 'alex8955'
 import random
 
 class player(object):
-    __doc__ = "This object represents the player within the game. It handles creation and storage of all player statistics."
+    """
+    This object represents the player within the game. It handles creation and storage of all player statistics.
+    """
 
 
     strg = agi = end = hp = arm = 0
@@ -15,7 +17,7 @@ class player(object):
 
 
     def roll_stats(self):
-        #generates player stats.
+        "generates player stats"
         roll = {'strg':0, 'agi':0, 'end':0}
         roll['strg'] = random.randint(1, 18)
         roll['agi'] = random.randint(1,18)
