@@ -36,8 +36,11 @@ class map(object):
 
 
     def rollDiff(self):
+        """Determines the difficulty of a room.
+        The difficulty will be used to modify monster stats, and perhaps item drops.
+        It uses ranges so that chances can be modified easily and is then bucketed for use.
+        """
         diffRoll = mechanics.roll100()
-        #the difficulty will be used to modify monster stats, and perhaps item drops. It uses ranges so that chances can be modified easily and is them bucketed for use.
         if diffRoll in range(0, 24):
             return 0
         elif diffRoll in range(25, 74):
@@ -49,6 +52,7 @@ class map(object):
 
 
     def rollExits(self):
+        "Determines how many exits a given room has."
         exitsRoll = mechanics.roll100()
         #exits are bucketed similar to difficulty
         if exitsRoll in range(0, 4):
@@ -62,6 +66,7 @@ class map(object):
 
 
     def rollNextRooms(self):
+        "Chooses the difficulty for each next door. Ensures that each door is a different difficulty."
         #Need to change this to treat doorDiffs as an array
         self.door1diff = self.rollDiff()
         while self.door2diff == 999 or self.door2diff == self.door1diff:
@@ -73,6 +78,7 @@ class map(object):
 
 
     def doorDesc(self, diff):
+        "selects door descriptions"
         if diff == 0:
             return "This wooden door feels warm and inviting."
         elif diff == 1:
@@ -84,7 +90,7 @@ class map(object):
 
 
     def nextRooms(self, exits):
-        #displays exits for the next rooms.
+        "displays exits for the next rooms."
         if exits > 1:
             print "This room has {} exits.".format(exits)
         else:
@@ -98,7 +104,7 @@ class map(object):
             print "4) {}".format(self.doorDesc(self.door4diff))
 
     def chooseDoor(self, d1d, d2d, d3d, d4d, exits):
-    #Prompts player for door choice and returns the new room
+        "Prompts player for door choice and returns the new room."
         newRoom = None
         while not newRoom:
             choice = int(raw_input("Which exit will you take? "))
@@ -123,15 +129,7 @@ class map(object):
                 print "That is not a valid choice."
         return newRoom
 
-    def spawnMob(self, diff):
-        if diff == 0:
-            pass
-        elif diff == 1:
-            pass
-        elif diff == 2:
-            pass
-        else:
-            pass
+
 
     def enter(self, room):
         print ""
@@ -176,8 +174,11 @@ class startRoom(map):
         pass
 
 
+
 class endRoom(map):
-    pass
+
+    def __init__(self):
+        self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
 
 def main():
     room1 = miscRoom(1)

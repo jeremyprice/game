@@ -57,7 +57,11 @@ class dragon(mob):
 
 
 
-def randomMob(diff):
+def
+
+
+
+def spawnMob(diff):
     """
     Handles rules for spawning monsters when entering a room. Logic is documented in readme
     spawnRoll will determine if a monster will spawn. mightRoll will determine the might of a monster if it does spawn.
