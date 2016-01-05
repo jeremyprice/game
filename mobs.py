@@ -57,10 +57,6 @@ class dragon(mob):
 
 
 
-def
-
-
-
 def spawnMob(diff):
     """
     Handles rules for spawning monsters when entering a room. Logic is documented in readme
@@ -91,7 +87,7 @@ def spawnMob(diff):
             elif mightRoll in range(20,85):
                 #spawn medium
                 pass
-            elif mightRoll in range(86,98)
+            elif mightRoll in range(86,98):
                 #spawn hard
                 pass
             elif mightRoll == 99:
@@ -107,7 +103,7 @@ def spawnMob(diff):
             elif mightRoll in range(20,85):
                 #spawn hard
                 pass
-            elif mightRoll in range(86,99)
+            elif mightRoll in range(86,99):
                 #spawn very hard
                 pass
         else:
@@ -120,7 +116,7 @@ def spawnMob(diff):
         elif mightRoll in range(40,94):
             #spawn very hard
             pass
-        elif mightRoll in range(95,99)
+        elif mightRoll in range(95,99):
             #spawn god-like
             pass
 
