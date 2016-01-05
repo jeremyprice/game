@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-__author__ = 'alex8955'
+__author__ = 'alex barnes'
 
 import random
 import mechanics
@@ -134,6 +134,12 @@ class map(object):
     def enter(self, room):
         print ""
         print room.desc
+        monster = mobs.pickMob(room.difficulty)
+        if type(monster) != type(None):
+            print monster.desc
+            print ""
+        else:
+            print "You appear to be alone here\n"
 
 
 
@@ -141,7 +147,7 @@ class miscRoom(map):
 
     def rollDesc(self):
         """
-        Randomly assigned descriptions to rooms. In the future, I plan to move these out to a flat file which will be read from.ßß
+        Randomly assigned descriptions to rooms. In the future, I plan to move these out to a flat file which will be read from.
         """
         descRoll = random.randint(0, 4)
         if descRoll == 0:
@@ -174,6 +180,7 @@ class startRoom(map):
         self.exits = 1
         self.desc = "You awaken in a cramped stone cell. Your head aches and you have no memory of how you came to be here. There are a few items bundled together in the center of the room, and the door hangs slightly open. You hear the distant sound of creatures in the darkness beyond."
         self.door1diff = 1
+        self.difficulty = -1
         pass
 
 
@@ -182,6 +189,7 @@ class endRoom(map):
 
     def __init__(self):
         self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
+        self.difficulty = -1
 
 def main():
     room1 = miscRoom(1)

@@ -49,14 +49,17 @@ Player will have a character that moves through rooms and randomly encounters mo
 
 - Stats
     - Same as player stats, with some additions.
-    - mgt (might): 0 through 99. General rating of the monster's difficulty. Will be used to modify a base monster type's stats. For example, a base type of monster will be a goblin. A goblin with might 0 will be a Weak Goblin, and will have all stats slightly decreased. A goblin with might 10 might be a Champion Goblin, and have severely increased stats.
+    - mgt (might): !!!may remove this. Not currently used!!! 0 through 99. General rating of the monster's difficulty. Will be used to modify a base monster type's stats. For example, a base type of monster will be a goblin. A goblin with might 0 will be a Weak Goblin, and will have all stats slightly decreased. A goblin with might 10 might be a Champion Goblin, and have severely increased stats.
         - Might of 0 through 19 will be considered easy monster, 20 through 39 as medium, 40 through 59 as hard, 60 through 79 as very hard, and 80 through 99 as god-like. 
- - Title: Added to name, based on Might.  
+    - bdiff (base difficulty): used for mob selection when spawning. A general rating of the base monster type's difficulty. 
+- Title: Added to name, based on Might.  
+- Desc (description): Short description of mob. Displayed when player enters a room with the mob. 
 - Skills
 
 
 ! Notes:
-    - Mobs will be generated based on the might value rolled (currently in mobs.spawnMob). There will be basic types of mobs (goblin, dragon, skeleton etc.), and titles that act as modifiers for those types (weak, sly, vicious, champion etc) which will provide various stat modifications. Types will be based on a certain base value, for instance goblins will have a base might of 5. The range for a type, based on titles, will be something like plus or minus 25, meaning a roll of anywhere between 0 and 30 can get you a goblin. A roll of 0 would get you a weak goblin: weak (-5 from base) and goblin (base might of 5). There will be overlaps between types, so a roll of 60 may be you a strong skeleton or a weak dragon. 
+    - Mobs are currently generated only based on the difficulty result. Room Difficulty influences the roll table for mobs.PickMob. Within the roll table, there is a spawn roll and a might roll. For any given difficulty, there is a value above which a spawn roll must be to spawn a mob. Once that spawn roll check is passed, the might roll determines the actual difficulty of the mob to be spawned. The might roll will land within a difficulty bucket, and a monster of that difficulty will be spawned using mobs.spawnMob.
+    - Mobs will be generated based on the might value rolled (currently in mobs.pickMob). There will be basic types of mobs (goblin, dragon, skeleton etc.), and titles that act as modifiers for those types (weak, sly, vicious, champion etc) which will provide various stat modifications. Types will be based on a certain base value, for instance goblins will have a base might of 5. The range for a type, based on titles, will be something like plus or minus 25, meaning a roll of anywhere between 0 and 30 can get you a goblin. A roll of 0 would get you a weak goblin: weak (-5 from base) and goblin (base might of 5). There will be overlaps between types, so a roll of 60 may be you a strong skeleton or a weak dragon. 
     - Mobs will be generated when a room is entered.
 
 +------------------------------------------------------------+
@@ -141,7 +144,8 @@ Player will have a character that moves through rooms and randomly encounters mo
             - Roll for chance event
             - Roll next rooms
             - Roll to check for a monster
-            - Spawn monster based on roll
+            - Roll monster might
+            - Spawn monster based on might and spawn roll
                 - Determine type of monster
                 - Determine title of monster
             - Fight monster until either the monster of player's HP reaches < 1

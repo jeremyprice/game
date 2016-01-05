@@ -7,12 +7,6 @@ import player
 import room
 
 
-
-def enter(room):
-    print ""
-    print room.desc
-
-
 def main():
     currentRoom = room.startRoom()
 
