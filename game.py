@@ -25,7 +25,8 @@ def main():
         currentRoom.nextRooms(currentRoom.exits)
         currentRoom = currentRoom.chooseDoor(currentRoom.door1diff, currentRoom.door2diff, currentRoom.door3diff, currentRoom.door4diff, currentRoom.exits)
 
-
+    if char.hp < 1:
+        print "You have died, like many before you.ß"
 
 
 if __name__ == "__main__":

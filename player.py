@@ -67,10 +67,10 @@ class player(object):
 
         #set secondary stats based on primary
         self.hp = 100 + (self.end * 5)
-        if self.agi % 2 == 0:
-            self.arm = self.agi / 2
+        if self.end % 2 == 0:
+            self.arm = self.end / 2
         else:
-            self.arm = (self.agi - 1) / 2
+            self.arm = (self.end - 1) / 2
 
         print ""
         print "Hail, {}.".format(self.name)

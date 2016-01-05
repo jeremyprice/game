@@ -140,6 +140,9 @@ class map(object):
 class miscRoom(map):
 
     def rollDesc(self):
+        """
+        Randomly assigned descriptions to rooms. In the future, I plan to move these out to a flat file which will be read from.ßß
+        """
         descRoll = random.randint(0, 4)
         if descRoll == 0:
             self.desc = "You walk through the door into a stone corridor, dimly lit by a flickering torch on the wall. Filthy water drips from the ceiling, and the walls are cast in shadows."
