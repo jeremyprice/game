@@ -17,10 +17,10 @@ class mob(object):
 
     def calcArm(self, agi):
         "calculate Armor based on Agility"
-        if agi % 2 == 0:
-            arm = self.agi / 2
+        if end % 2 == 0:
+            arm = self.end / 2
         else:
-            arm = (agi - 1) / 2
+            arm = (end - 1) / 2
         return arm
 
     def calcHP(self, end):
