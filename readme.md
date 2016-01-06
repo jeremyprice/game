@@ -19,8 +19,8 @@ Player will have a character that moves through rooms and randomly encounters mo
 +------------------------------------------------------------+
 +                          Player                            +
 +------------------------------------------------------------+
-+Inherits random
-+Inherited by game
++ Imports random
++ Imported by game
 
 - Stats:
     -strg (strength): Determines how much damage player does with attacks.
@@ -33,6 +33,7 @@ Player will have a character that moves through rooms and randomly encounters mo
     -level (future).
     -exp (experience): Allows player to level up. Gained by killing mobs.  (future).
     -name.
+    -ap (action points): Used in combat to control turns. Influenced by agility. 
 
 - Equipment
 - Inventory
@@ -45,7 +46,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 +------------------------------------------------------------+
 +                            Mob                             +
 +------------------------------------------------------------+
-+Inherited by room
++ Imported by room
 
 - Stats
     - Same as player stats, with some additions.
@@ -65,8 +66,8 @@ Player will have a character that moves through rooms and randomly encounters mo
 +------------------------------------------------------------+
 +                           Room                             +
 +------------------------------------------------------------+
-+ Inherits mechanics, mob, random
-+ Inherited by game
++ Imports mechanics, mob, random
++ Imported by game
 
 - Generate monster.
     - Based on difficulty of room. Chances:
@@ -100,10 +101,12 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Difficulty: Value 0 through 99. To begin with, these with break down into easy (0 - 24), medium (25 - 74), hard (75 - 89), and very hard (90 - 99).
 - Chance: Value 0 through 99. Change that a special event will occur in a room. Things such as free healing, automatic damage etc.
 - Description: At first, description will randomly pull from a list of prewritten strings. May change this in the future.
+- monCount (Monster Count): Current number of monsters in the room.
 
 +------------------------------------------------------------+
 +                          Items                             +
 +------------------------------------------------------------+
+(not implemented)
 - Stats
 - Location worn
 - Use
@@ -111,29 +114,37 @@ Player will have a character that moves through rooms and randomly encounters mo
 +------------------------------------------------------------+
 +                          Skills                            +
 +------------------------------------------------------------+
+(not implemented)
 - Effect?
 
 +------------------------------------------------------------+
 +                          Combat                            +
 +------------------------------------------------------------+
++ Imports random, time
++ Imported by game 
+
 - Turns
 - Damage mechanism
-- Item generation? (maybe on monster)
+- Item generation? (maybe on monster) (ni)
 
 +------------------------------------------------------------+
 +                          Mechanics                         +
 +------------------------------------------------------------+
++ Imported by room
+
 + Base level class
 + Houses game mechanics used by other classes
-+ Inherited by room
+
 
 - Rolls
 
 +------------------------------------------------------------+
 +                           Game                             +
 +------------------------------------------------------------+
++ Imports room, player, combat
+
 + Class that ties all others together and runs the game
-+ Inherits room, player
+
 
 ! Notes:
     - Basic flow of the game:

@@ -14,6 +14,7 @@ class map(object):
     desc = ""
     chance = 0
     exits = 0
+    monCount = 0
     door1diff = door2diff = door3diff = door4diff = 999
 
     def __init__(self):
@@ -136,10 +137,13 @@ class map(object):
         print room.desc
         monster = mobs.pickMob(room.difficulty)
         if type(monster) != type(None):
+            room.monCount += 1
             print monster.desc
             print ""
+            return monster
         else:
             print "You appear to be alone here\n"
+            return None
 
 
 

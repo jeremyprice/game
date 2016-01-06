@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-__author__ = 'alex8955'
+__author__ = 'alex barnes'
 
 import mechanics
 
@@ -11,8 +11,7 @@ class mob(object):
     All non-player characters in the game will be based off of this base class.
     Mobs should be built with a base agility of 10. Slower than that can cause high agility players to have too easy of a time. Faster than that can be overwhelming. Agility has a major impact on difficulty, due to the way turns happen.
     """
-    strg = agi = end = bdiff = 0
-    hp = arm = 0
+    strg = agi = end = bdiff = ap = hp = chp = arm = 0
     name = title = desc = ""
 
     def calcArm(self, end):
@@ -30,7 +29,7 @@ class mob(object):
 
     def calcStats(self):
         self.arm = self.calcArm(self.end)
-        self.hp = self.calcHP(self.end)
+        self.hp = self.chp = self.calcHP(self.end)
 
     def __init__(self):
         raise NotImplementedError
@@ -119,14 +118,10 @@ def pickMob(diff, debug = 0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
             if mightRoll in range(0,66):
-                #spawn easy
                 return spawnMob(0, mightRoll)
             elif mightRoll in range(67,98):
-                #spawn medium
                 return spawnMob(1, mightRoll)
-                #return spawnMob(1, mightRoll)
             elif mightRoll == 99:
-                #spawn hard
                 return spawnMob(2, mightRoll)
         else:
             return None
@@ -135,16 +130,12 @@ def pickMob(diff, debug = 0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
             if mightRoll in range(0,19):
-                #spawn easy
                 return spawnMob(0, mightRoll)
             elif mightRoll in range(20,85):
-                #spawn medium
                 return spawnMob(1, mightRoll)
             elif mightRoll in range(86,98):
-                #spawn hard
                 return spawnMob(2, mightRoll)
             elif mightRoll == 99:
-                #spawn very hard
                 return spawnMob(3, mightRoll)
         else:
             return None
@@ -153,13 +144,10 @@ def pickMob(diff, debug = 0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 19:
             if mightRoll in range(0,19):
-                #spawn medium
                 return spawnMob(1, mightRoll)
             elif mightRoll in range(20,85):
-                #spawn hard
                 return spawnMob(2, mightRoll)
             elif mightRoll in range(86,99):
-                #spawn very hard
                 return spawnMob(3, mightRoll)
         else:
             return None

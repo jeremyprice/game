@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-__author__ = 'alex8955'
+__author__ = 'alex barnes'
 
 import random
 
@@ -10,8 +10,7 @@ class player(object):
     This object represents the player within the game. It handles creation and storage of all player statistics.
     """
 
-
-    strg = agi = end = hp = arm = 0
+    strg = agi = end = hp = chp = arm = ap = 0
     name = ""
 
 
@@ -23,7 +22,7 @@ class player(object):
         roll['agi'] = random.randint(1,18)
         roll['end'] = random.randint(1,18)
         #make sure total stars are between 15 and 45, if not reroll
-        while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 15:
+        while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25:
             roll = self.roll_stats()
         return roll
 
@@ -66,7 +65,7 @@ class player(object):
             self.end = roll3['end']
 
         #set secondary stats based on primary
-        self.hp = 100 + (self.end * 5)
+        self.hp = self.chp = 100 + (self.end * 5)
         if self.end % 2 == 0:
             self.arm = self.end / 2
         else:
@@ -78,11 +77,9 @@ class player(object):
         print self
 
 
-    #def __enter__(self):
-        #self.create()
-
 def main():
     char = player()
+
 
 
 if __name__ == "__main__":
