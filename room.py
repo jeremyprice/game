@@ -12,7 +12,6 @@ class map(object):
 
     difficulty = 0
     desc = ""
-    chance = 0
     exits = 0
     monCount = 0
     door1diff = door2diff = door3diff = door4diff = 999
@@ -22,16 +21,34 @@ class map(object):
         raise NotImplementedError
 
 
-    def rollChance(self):
-        self.chance = mechanics.roll100()
+    def rollChance(self, player):
+        chance = mechanics.roll100()
+
         #scaffold for chance events
-        if self.chance in range(0, 25):
-            pass
-            #some event
-        elif self.chance in (50, 51):
-            pass
-            #some rare event
-        elif self.chance == 99:
+        if chance in range(0, 25):
+            print "Chance event 1"
+
+        elif chance in range(26, 30):
+            if player.chp < player.hp:
+                print "This room has a small fountain containing clean water. You quickly drink it, restoring your health."
+                if (player.chp + 50) <= player.hp:
+                    player.chp + 50
+                else:
+                    player.chp = player.hp
+            else:
+                print "This room has a small fountain containing clean water. You quickly drink it, but your health is already full."
+
+        elif chance in (31, 50):
+            print "Chance event 2"
+
+        elif chance in (51, 52):
+            print "You find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(player.arm+2)
+            player.arm += 2
+
+        elif chance in (53, 98):
+            print "Chance event 3"
+
+        elif chance == 99:
             pass
             #Some very rare event
 
@@ -132,18 +149,19 @@ class map(object):
 
 
 
-    def enter(self, room):
+    def enter(self, player):
         print ""
-        print room.desc
-        monster = mobs.pickMob(room.difficulty)
+        print self.desc
+        monster = mobs.pickMob(self.difficulty)
         if type(monster) != type(None):
-            room.monCount += 1
+            self.monCount += 1
             print monster.desc
             print ""
             return monster
         else:
             print "You appear to be alone here\n"
             return None
+        self.rollChance(player)
 
 
 
@@ -170,7 +188,6 @@ class miscRoom(map):
 
     def __init__(self, diff):
         self.difficulty = diff
-        self.rollChance()
         self.rollDesc()
         self.exits = self.rollExits()
         self.rollNextRooms()
@@ -200,7 +217,6 @@ def main():
 
     print "Room debug info:"
     print "Difficulty - {},".format(room1.difficulty)
-    print "Chance - {}.".format(room1.chance)
     print "Exits - {}.".format(room1.exits)
     print "Door 1 diff: {}".format(room1.door1diff)
     print "Door 2 diff: {}".format(room1.door2diff)

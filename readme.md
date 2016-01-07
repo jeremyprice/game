@@ -3,7 +3,7 @@ Basic game written to practice python.
 Player will have a character that moves through rooms and randomly encounters monsters to fight. Possibility of finding equipment in rooms or from dead monsters.
 
 +------------------------------------------------------------------------------------------------------------------------+
-+!!!#                                                     Classes                                                      !!!+
++!!!                                                     Classes                                                      !!!+
 +------------------------------------------------------------------------------------------------------------------------+
 + Player - the character and their information.
 + Actions -  actions the player can take.

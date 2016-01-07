@@ -22,7 +22,7 @@ class player(object):
         roll['agi'] = random.randint(1,18)
         roll['end'] = random.randint(1,18)
         #make sure total stars are between 15 and 45, if not reroll
-        while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25:
+        while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25 or roll['strg'] < 4 or roll['agi'] < 4 or roll['end'] < 4:
             roll = self.roll_stats()
         return roll
 

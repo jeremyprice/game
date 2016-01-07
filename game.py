@@ -16,7 +16,7 @@ def main():
     char = player.player()
 
     while char.chp > 0:
-        monster = currentRoom.enter(currentRoom)
+        monster = currentRoom.enter(char)
         while currentRoom.monCount > 0 and type(monster) != type(None):
             combat.combat(char, monster)
             currentRoom.monCount -= 1
