@@ -7,6 +7,7 @@ import random
 import mechanics
 import mobs
 
+
 class map(object):
     __str__ = "Base class for generating and managing rooms in pygame."
 
@@ -20,38 +21,63 @@ class map(object):
         "This is an abstract base class and should not be used directly"
         raise NotImplementedError
 
-
     def rollChance(self, player):
+        """
+        rolls and enacts chance events.
+        chance events have a chance of occurring once per room.
+        chance events occur after a battle and before the next door is chosen.
+        """
         chance = mechanics.roll100()
-
-        #scaffold for chance events
-        if chance in range(0, 25):
-            print "Chance event 1"
-
-        elif chance in range(26, 30):
+        # scaffold for chance events
+        if chance in range(0, 24):
+            # nothing. 25% chance of no event.
+            print "Chance event. Roll {}".format(chance)
+        elif chance in range(25, 29):
             if player.chp < player.hp:
                 print "This room has a small fountain containing clean water. You quickly drink it, restoring your health."
                 if (player.chp + 50) <= player.hp:
-                    player.chp + 50
+                    player.chp += 50
                 else:
                     player.chp = player.hp
             else:
                 print "This room has a small fountain containing clean water. You quickly drink it, but your health is already full."
+            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
 
-        elif chance in (31, 50):
-            print "Chance event 2"
+        elif chance in range(30, 34):
+            print "An imp throws a rock at you before disappearing in a puff of smoke."
+            player.chp -= 5
+            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
 
-        elif chance in (51, 52):
-            print "You find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(player.arm+2)
+        elif chance in range(35, 49):
+            pass
+
+        elif chance in (50, 51):
+            print "You find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(
+                player.arm + 2)
             player.arm += 2
 
-        elif chance in (53, 98):
-            print "Chance event 3"
+        elif chance in range(52, 95):
+            pass
+
+        elif chance in (96, 97):
+            # Keep this in mind once levels are implemented
+            print "A lost spirit appears to you. 'I perished here, like many before me. I give you my blessing, that you may find freedom again'. As the spirit disappears, you feel slightly more healthy. (Health permanently increased to  {}).".format(
+                player.hp + 30)
+            player.hp += 30
+            if (player.chp + 30) <= player.hp:
+                player.chp += 30
+            else:
+                player.chp = player.hp
+            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
+
+        elif chance == 98:
+            print "You find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
+                player.agi + 1)
+            player.agi += 1
 
         elif chance == 99:
             pass
-            #Some very rare event
-
+            # Some very rare event
 
     def rollDiff(self):
         """Determines the difficulty of a room.
@@ -68,11 +94,10 @@ class map(object):
         else:
             return 3
 
-
     def rollExits(self):
         "Determines how many exits a given room has."
         exitsRoll = mechanics.roll100()
-        #exits are bucketed similar to difficulty
+        # exits are bucketed similar to difficulty
         if exitsRoll in range(0, 4):
             return 1
         elif exitsRoll in range(5, 54):
@@ -82,10 +107,9 @@ class map(object):
         else:
             return 4
 
-
     def rollNextRooms(self):
         "Chooses the difficulty for each next door. Ensures that each door is a different difficulty."
-        #Need to change this to treat doorDiffs as an array
+        # Need to change this to treat doorDiffs as an array
         self.door1diff = self.rollDiff()
         while self.door2diff == 999 or self.door2diff == self.door1diff:
             self.door2diff = self.rollDiff()
@@ -93,7 +117,6 @@ class map(object):
             self.door3diff = self.rollDiff()
         while self.door4diff == 999 or self.door4diff == self.door1diff or self.door4diff == self.door2diff or self.door4diff == self.door3diff:
             self.door4diff = self.rollDiff()
-
 
     def doorDesc(self, diff):
         "selects door descriptions"
@@ -106,12 +129,13 @@ class map(object):
         else:
             return "Blood seeps beneath this black stone door, and the sounds of something angry emanate from within."
 
-
     def nextRooms(self, exits):
         "displays exits for the next rooms."
         if exits > 1:
+            print ""
             print "This room has {} exits.".format(exits)
         else:
+            print ""
             print "This room only has 1 exit."
         print "1) {}".format(self.doorDesc(self.door1diff))
         if exits > 1:
@@ -122,10 +146,23 @@ class map(object):
             print "4) {}".format(self.doorDesc(self.door4diff))
 
     def chooseDoor(self, d1d, d2d, d3d, d4d, exits):
-        "Prompts player for door choice and returns the new room."
+        """
+        prompts player for door choice and returns the new room.
+        receives the difficulty number for each possible door (d1d, d2d etc.) and the actual number of exits to display.
+        need to streamline the checks here. Not happy with having to reset the choice to None for any incorrect choice.
+        """
         newRoom = None
+        choice = None
         while not newRoom:
-            choice = int(raw_input("Which exit will you take? "))
+            while type(choice) != int:
+                try:
+                    choice = raw_input("Which exit will you take? ")
+                    choice = int(choice)
+                except:
+                    if type(choice) == str:
+                        if choice.lower() in ['exit', 'quit']:
+                            exit()
+                    print "That is not a valid door choice."
             if choice == 1:
                 newRoom = miscRoom(d1d)
             elif choice == 2:
@@ -133,23 +170,29 @@ class map(object):
                     newRoom = miscRoom(d2d)
                 else:
                     print "That is not a valid choice."
+                    choice = None
             elif choice == 3:
                 if exits > 2:
                     newRoom = miscRoom(d3d)
                 else:
                     print "That is not a valid choice."
+                    choice = None
             elif choice == 4:
                 if exits > 3:
                     newRoom = miscRoom(d4d)
                 else:
                     print "That is not a valid choice."
+                    choice = None
             else:
                 print "That is not a valid choice."
+                choice = None
         return newRoom
 
-
-
     def enter(self, player):
+        """
+        takes actions when a player enters a room.
+        i would like to move combat into this, but it needs to interrupt the regular game loop, so it is currently implemented there.
+        """
         print ""
         print self.desc
         monster = mobs.pickMob(self.difficulty)
@@ -159,14 +202,11 @@ class map(object):
             print ""
             return monster
         else:
-            print "You appear to be alone here\n"
+            print "You appear to be alone here."
             return None
-        self.rollChance(player)
-
 
 
 class miscRoom(map):
-
     def rollDesc(self):
         """
         Randomly assigned descriptions to rooms. In the future, I plan to move these out to a flat file which will be read from.
@@ -185,7 +225,6 @@ class miscRoom(map):
         else:
             self.desc = "There appears to be a problem generating a description."
 
-
     def __init__(self, diff):
         self.difficulty = diff
         self.rollDesc()
@@ -194,9 +233,7 @@ class miscRoom(map):
         pass
 
 
-
 class startRoom(map):
-
     def __init__(self):
         self.exits = 1
         self.desc = "You awaken in a cramped stone cell. Your head aches and you have no memory of how you came to be here. There are a few items bundled together in the center of the room, and the door hangs slightly open. You hear the distant sound of creatures in the darkness beyond."
@@ -205,12 +242,11 @@ class startRoom(map):
         pass
 
 
-
 class endRoom(map):
-
     def __init__(self):
         self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
         self.difficulty = -1
+
 
 def main():
     room1 = miscRoom(1)

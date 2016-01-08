@@ -5,6 +5,7 @@ __author__ = 'alex barnes'
 
 import mechanics
 
+
 class mob(object):
     """
     Abstract base class.
@@ -33,8 +34,6 @@ class mob(object):
 
     def __init__(self):
         raise NotImplementedError
-
-
 
 
 ### Monster definitions ###
@@ -75,6 +74,7 @@ class orc(mob):
     def __init__(self):
         self.calcStats()
 
+
 class elemental(mob):
     name = "Elemental"
     strg = 10
@@ -85,6 +85,7 @@ class elemental(mob):
 
     def __init__(self):
         self.calcStats()
+
 
 class dragon(mob):
     name = "Dragon"
@@ -98,8 +99,7 @@ class dragon(mob):
         self.calcStats()
 
 
-
-def pickMob(diff, debug = 0):
+def pickMob(diff, debug=0):
     """
     Handles rules for spawning monsters when entering a room. Logic is documented in readme
     spawnRoll will determine if a monster will spawn. mightRoll will determine the might of a monster if it does spawn.
@@ -108,7 +108,6 @@ def pickMob(diff, debug = 0):
     Set debug = 1 for roll details
     diff -1 is for rooms that should never spawn a mob
     """
-
     spawnRoll = mechanics.roll100()
     mightRoll = mechanics.roll100()
     if diff == -1:
@@ -117,9 +116,9 @@ def pickMob(diff, debug = 0):
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
-            if mightRoll in range(0,66):
+            if mightRoll in range(0, 66):
                 return spawnMob(0, mightRoll)
-            elif mightRoll in range(67,98):
+            elif mightRoll in range(67, 98):
                 return spawnMob(1, mightRoll)
             elif mightRoll == 99:
                 return spawnMob(2, mightRoll)
@@ -129,11 +128,11 @@ def pickMob(diff, debug = 0):
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
-            if mightRoll in range(0,19):
+            if mightRoll in range(0, 19):
                 return spawnMob(0, mightRoll)
-            elif mightRoll in range(20,85):
+            elif mightRoll in range(20, 85):
                 return spawnMob(1, mightRoll)
-            elif mightRoll in range(86,98):
+            elif mightRoll in range(86, 98):
                 return spawnMob(2, mightRoll)
             elif mightRoll == 99:
                 return spawnMob(3, mightRoll)
@@ -143,29 +142,35 @@ def pickMob(diff, debug = 0):
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 19:
-            if mightRoll in range(0,19):
+            if mightRoll in range(0, 19):
                 return spawnMob(1, mightRoll)
-            elif mightRoll in range(20,85):
+            elif mightRoll in range(20, 85):
                 return spawnMob(2, mightRoll)
-            elif mightRoll in range(86,99):
+            elif mightRoll in range(86, 99):
                 return spawnMob(3, mightRoll)
         else:
             return None
     else:
-        #Difficulty 4 rooms have 100% spawn rate, so spawnRoll is not considered
+        # Difficulty 4 rooms have 100% spawn rate, so spawnRoll is not considered
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
-        if mightRoll in range(0,39):
-            #spawn hard
+        if mightRoll in range(0, 39):
+            # spawn hard
             return spawnMob(2, mightRoll)
-        elif mightRoll in range(40,94):
-            #spawn very hard
+        elif mightRoll in range(40, 94):
+            # spawn very hard
             return spawnMob(3, mightRoll)
-        elif mightRoll in range(95,99):
-            #spawn god-like
+        elif mightRoll in range(95, 99):
+            # spawn god-like
             return spawnMob(4, mightRoll)
 
+
 def spawnMob(diff, might):
+    """
+    Returns a mob for a given difficulty
+    In the future, this will have several mob types per difficulty and use something like random.choice to pick one.
+    This function will call to the title assignment function, once implemented
+    """
     if diff == 0:
         return goblin()
     elif diff == 1:
@@ -181,7 +186,8 @@ def spawnMob(diff, might):
 def main():
     monster = pickMob(1, 1)
     if type(monster) != type(None):
-        print "Name: {} \nHP: {} \nArmor: {} \nBase Diff: {}".format(monster.name, monster.hp, monster.arm, monster.bdiff)
+        print "Name: {} \nHP: {} \nArmor: {} \nBase Diff: {}".format(monster.name, monster.hp, monster.arm,
+                                                                     monster.bdiff)
         print monster.desc
     else:
         print "No mob spawned"
