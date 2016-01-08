@@ -48,9 +48,9 @@ def combat(player, mob):
             else:
                 random.choice(pAttack(player, mob), mAttack(mob, player))
     if mob.chp <= 0:
-        print "You have killed the {}!".format(mob.name)
+        print "You have killed the {}!\n".format(mob.name)
         player.ap = 0
-        print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
+        player.showHP()
     elif player.chp <= 0:
         print "You have been defeated by the {}!".format(mob.name)
 

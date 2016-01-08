@@ -32,7 +32,7 @@ class player(object):
 
     def showHP(self):
         "standard format to print players current HP"
-        print "Player HP: {}/{} AP:{}/100".format(player.chp, player.hp, player.ap)
+        print "Player HP: {}/{} AP:{}/100".format(self.chp, self.hp, self.ap)
 
     def __str__(self):
         return "Your stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}".format(
