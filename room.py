@@ -149,7 +149,6 @@ class map(object):
         """
         prompts player for door choice and returns the new room.
         receives the difficulty number for each possible door (d1d, d2d etc.) and the actual number of exits to display.
-        need to streamline the checks here. Not happy with having to reset the choice to None for any incorrect choice.
         """
         newRoom = None
         choice = None
@@ -161,28 +160,20 @@ class map(object):
                 except:
                     if type(choice) == str:
                         if choice.lower() in ['exit', 'quit']:
+                            print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
                             exit()
-                    print "That is not a valid door choice."
-            if choice == 1:
+                    print "That is not a valid choice."
+            if choice > exits:
+                print "That is not a valid choice."
+                choice = None
+            elif choice == 1:
                 newRoom = miscRoom(d1d)
             elif choice == 2:
-                if exits > 1:
-                    newRoom = miscRoom(d2d)
-                else:
-                    print "That is not a valid choice."
-                    choice = None
+                newRoom = miscRoom(d2d)
             elif choice == 3:
-                if exits > 2:
-                    newRoom = miscRoom(d3d)
-                else:
-                    print "That is not a valid choice."
-                    choice = None
+                 newRoom = miscRoom(d3d)
             elif choice == 4:
-                if exits > 3:
-                    newRoom = miscRoom(d4d)
-                else:
-                    print "That is not a valid choice."
-                    choice = None
+                newRoom = miscRoom(d4d)
             else:
                 print "That is not a valid choice."
                 choice = None
