@@ -265,6 +265,12 @@ class startRoom(map):
 
 
 class endRoom(map):
+    """
+    Desc: this is the room that must be reached in order to win the game.
+
+    Notes:
+    I would like to build a leader board at some points.
+    """
     def __init__(self):
         self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
         self.difficulty = -1
