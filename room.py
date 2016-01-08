@@ -15,7 +15,7 @@ class map(object):
     desc = ""
     exits = 0
     monCount = 0
-    door1diff = door2diff = door3diff = door4diff = 999
+    doorDiffs = [999,999,999,999]
 
     def __init__(self):
         "This is an abstract base class and should not be used directly"
@@ -31,7 +31,7 @@ class map(object):
         # scaffold for chance events
         if chance in range(0, 24):
             # nothing. 25% chance of no event.
-            print "Chance event. Roll {}".format(chance)
+            pass
         elif chance in range(25, 29):
             if player.chp < player.hp:
                 print "This room has a small fountain containing clean water. You quickly drink it, restoring your health."
@@ -109,14 +109,13 @@ class map(object):
 
     def rollNextRooms(self):
         "Chooses the difficulty for each next door. Ensures that each door is a different difficulty."
-        # Need to change this to treat doorDiffs as an array
-        self.door1diff = self.rollDiff()
-        while self.door2diff == 999 or self.door2diff == self.door1diff:
-            self.door2diff = self.rollDiff()
-        while self.door3diff == 999 or self.door3diff == self.door1diff or self.door3diff == self.door2diff:
-            self.door3diff = self.rollDiff()
-        while self.door4diff == 999 or self.door4diff == self.door1diff or self.door4diff == self.door2diff or self.door4diff == self.door3diff:
-            self.door4diff = self.rollDiff()
+        self.doorDiffs[0] = self.rollDiff()
+        while self.doorDiffs[1] == 999 or self.doorDiffs[1] == self.doorDiffs[0]:
+            self.doorDiffs[1] = self.rollDiff()
+        while self.doorDiffs[2] == 999 or self.doorDiffs[2] == self.doorDiffs[0] or self.doorDiffs[2] == self.doorDiffs[1]:
+            self.doorDiffs[2] = self.rollDiff()
+        while self.doorDiffs[3] == 999 or self.doorDiffs[3] == self.doorDiffs[0] or self.doorDiffs[3] == self.doorDiffs[1] or self.doorDiffs[3] == self.doorDiffs[2]:
+            self.doorDiffs[3] = self.rollDiff()
 
     def doorDesc(self, diff):
         "selects door descriptions"
@@ -137,15 +136,15 @@ class map(object):
         else:
             print ""
             print "This room only has 1 exit."
-        print "1) {}".format(self.doorDesc(self.door1diff))
+        print "1) {}".format(self.doorDesc(self.doorDiffs[0]))
         if exits > 1:
-            print "2) {}".format(self.doorDesc(self.door2diff))
+            print "2) {}".format(self.doorDesc(self.doorDiffs[1]))
         if exits > 2:
-            print "3) {}".format(self.doorDesc(self.door3diff))
+            print "3) {}".format(self.doorDesc(self.doorDiffs[2]))
         if exits > 3:
-            print "4) {}".format(self.doorDesc(self.door4diff))
+            print "4) {}".format(self.doorDesc(self.doorDiffs[3]))
 
-    def chooseDoor(self, d1d, d2d, d3d, d4d, exits):
+    def chooseDoor(self, doorDiffs, exits):
         """
         prompts player for door choice and returns the new room.
         receives the difficulty number for each possible door (d1d, d2d etc.) and the actual number of exits to display.
@@ -167,13 +166,13 @@ class map(object):
                 print "That is not a valid choice."
                 choice = None
             elif choice == 1:
-                newRoom = miscRoom(d1d)
+                newRoom = miscRoom(doorDiffs[0])
             elif choice == 2:
-                newRoom = miscRoom(d2d)
+                newRoom = miscRoom(doorDiffs[1])
             elif choice == 3:
-                 newRoom = miscRoom(d3d)
+                newRoom = miscRoom(doorDiffs[2])
             elif choice == 4:
-                newRoom = miscRoom(d4d)
+                newRoom = miscRoom(doorDiffs[3])
             else:
                 print "That is not a valid choice."
                 choice = None
@@ -228,7 +227,7 @@ class startRoom(map):
     def __init__(self):
         self.exits = 1
         self.desc = "You awaken in a cramped stone cell. Your head aches and you have no memory of how you came to be here. There are a few items bundled together in the center of the room, and the door hangs slightly open. You hear the distant sound of creatures in the darkness beyond."
-        self.door1diff = 1
+        self.doorDiffs[0] = 1
         self.difficulty = -1
         pass
 
@@ -245,10 +244,10 @@ def main():
     print "Room debug info:"
     print "Difficulty - {},".format(room1.difficulty)
     print "Exits - {}.".format(room1.exits)
-    print "Door 1 diff: {}".format(room1.door1diff)
-    print "Door 2 diff: {}".format(room1.door2diff)
-    print "Door 3 diff: {}".format(room1.door3diff)
-    print "Door 4 diff: {}".format(room1.door4diff)
+    print "Door 1 diff: {}".format(room1.doorDiffs[0])
+    print "Door 2 diff: {}".format(room1.doorDiffs[1])
+    print "Door 3 diff: {}".format(room1.doorDiffs[2])
+    print "Door 4 diff: {}".format(room1.doorDiffs[3])
 
 
 if __name__ == "__main__":

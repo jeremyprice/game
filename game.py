@@ -24,7 +24,7 @@ def main():
                 exit()
         currentRoom.rollChance(char)
         currentRoom.nextRooms(currentRoom.exits)
-        currentRoom = currentRoom.chooseDoor(currentRoom.door1diff, currentRoom.door2diff, currentRoom.door3diff, currentRoom.door4diff, currentRoom.exits)
+        currentRoom = currentRoom.chooseDoor(currentRoom.doorDiffs, currentRoom.exits)
 
     if char.chp < 1:
         print "You have died, like many before you."
