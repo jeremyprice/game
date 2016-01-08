@@ -23,7 +23,10 @@ class map(object):
 
     def rollChance(self, player):
         """
-        rolls and enacts chance events.
+        Desc: rolls and enacts chance events.
+        Called by: Main game loop in game.
+
+        Notes:
         chance events have a chance of occurring once per room.
         chance events occur after a battle and before the next door is chosen.
         """
@@ -41,12 +44,12 @@ class map(object):
                     player.chp = player.hp
             else:
                 print "This room has a small fountain containing clean water. You quickly drink it, but your health is already full."
-            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
+            player.showHP()
 
         elif chance in range(30, 34):
             print "An imp throws a rock at you before disappearing in a puff of smoke."
             player.chp -= 5
-            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
+            player.showHP()
 
         elif chance in range(35, 49):
             pass
@@ -68,7 +71,7 @@ class map(object):
                 player.chp += 30
             else:
                 player.chp = player.hp
-            print "Player HP: {}/{} AP:{}/100 \n".format(player.chp, player.hp, player.ap)
+            player.showHP()
 
         elif chance == 98:
             print "You find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
@@ -80,9 +83,13 @@ class map(object):
             # Some very rare event
 
     def rollDiff(self):
-        """Determines the difficulty of a room.
-        The difficulty will be used to modify monster stats, and perhaps item drops.
-        It uses ranges so that chances can be modified easily and is then bucketed for use.
+        """
+        Desc: determines the difficulty of a room.
+        Called by: room.map.rollNextRooms()
+
+        Notes:
+        the difficulty will be used to modify monster stats, and perhaps item drops.
+        it uses ranges so that chances can be modified easily and is then bucketed for use.
         """
         diffRoll = mechanics.roll100()
         if diffRoll in range(0, 24):
@@ -95,7 +102,10 @@ class map(object):
             return 3
 
     def rollExits(self):
-        "Determines how many exits a given room has."
+        """
+        Desc: determines how many exits a given room has.
+        Called by: room.map.miscRoom.__init__()
+        """
         exitsRoll = mechanics.roll100()
         # exits are bucketed similar to difficulty
         if exitsRoll in range(0, 4):
@@ -108,7 +118,12 @@ class map(object):
             return 4
 
     def rollNextRooms(self):
-        "Chooses the difficulty for each next door. Ensures that each door is a different difficulty."
+        """
+        Desc: chooses the difficulty for each next door.
+        Called by: room.map.miscRoom.__init__()
+
+        Notes:
+        ensures that each door is a different difficulty."""
         self.doorDiffs[0] = self.rollDiff()
         while self.doorDiffs[1] == 999 or self.doorDiffs[1] == self.doorDiffs[0]:
             self.doorDiffs[1] = self.rollDiff()
@@ -118,7 +133,10 @@ class map(object):
             self.doorDiffs[3] = self.rollDiff()
 
     def doorDesc(self, diff):
-        "selects door descriptions"
+        """
+        Desc: returns door descriptions
+        Called by: room.map.nextRooms()
+        """
         if diff == 0:
             return "This wooden door feels warm and inviting."
         elif diff == 1:
@@ -129,7 +147,10 @@ class map(object):
             return "Blood seeps beneath this black stone door, and the sounds of something angry emanate from within."
 
     def nextRooms(self, exits):
-        "displays exits for the next rooms."
+        """
+        Desc: displays exits for the next rooms.
+        Called by: room.map.miscRoom.__init__() and main game loop in game
+        """
         if exits > 1:
             print ""
             print "This room has {} exits.".format(exits)
@@ -146,8 +167,12 @@ class map(object):
 
     def chooseDoor(self, doorDiffs, exits):
         """
-        prompts player for door choice and returns the new room.
-        receives the difficulty number for each possible door (d1d, d2d etc.) and the actual number of exits to display.
+        Desc: prompts player for door choice and returns the new room.
+        Called by: main game loop in game
+
+        Notes:
+        receives the difficulty number for each possible door but only the actual number of exits to display.
+        this is the main prompt for the player currently. it will have its functionality greatly expanded and may need to move into mechanics
         """
         newRoom = None
         choice = None
@@ -180,7 +205,10 @@ class map(object):
 
     def enter(self, player):
         """
-        takes actions when a player enters a room.
+        Desc: takes actions when a player enters a room.
+        Called by: main game loop in game
+
+        Notes:
         i would like to move combat into this, but it needs to interrupt the regular game loop, so it is currently implemented there.
         """
         print ""
@@ -199,7 +227,11 @@ class map(object):
 class miscRoom(map):
     def rollDesc(self):
         """
-        Randomly assigned descriptions to rooms. In the future, I plan to move these out to a flat file which will be read from.
+        Desc: randomly assigned descriptions to rooms.
+        Called by: room.map.miscRoom.__init__()
+
+        Notes:
+        in the future, I plan to move these out to a flat file which will be read from.
         """
         descRoll = random.randint(0, 4)
         if descRoll == 0:

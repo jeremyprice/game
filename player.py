@@ -8,14 +8,18 @@ import random
 
 class player(object):
     """
-    This object represents the player within the game. It handles creation and storage of all player statistics.
+    this object represents the player within the game. It handles creation and storage of all player statistics.
+    will chance stats to dictionary in the future
     """
 
     strg = agi = end = hp = chp = arm = ap = 0
     name = ""
 
-    def roll_stats(self):
-        "generates player stats"
+    def rollStats(self):
+        """
+        Desc: generates player stats
+        Called by: player.player.__init__
+        """
         roll = {'strg': 0, 'agi': 0, 'end': 0}
         roll['strg'] = random.randint(1, 18)
         roll['agi'] = random.randint(1, 18)
@@ -23,8 +27,12 @@ class player(object):
         # make sure total stars are between 15 and 45, if not reroll
         while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25 or \
                         roll['strg'] < 4 or roll['agi'] < 4 or roll['end'] < 4:
-            roll = self.roll_stats()
+            roll = self.rollStats()
         return roll
+
+    def showHP(self):
+        "standard format to print players current HP"
+        print "Player HP: {}/{} AP:{}/100".format(player.chp, player.hp, player.ap)
 
     def __str__(self):
         return "Your stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}".format(
@@ -38,9 +46,9 @@ class player(object):
         print "You will have three rolls to choose from."
         print "Rolling stats."
 
-        roll1 = self.roll_stats()
-        roll2 = self.roll_stats()
-        roll3 = self.roll_stats()
+        roll1 = self.rollStats()
+        roll2 = self.rollStats()
+        roll3 = self.rollStats()
 
         # Debug stats. Special name 'AlexRocks' sets stats very high to allow for in-game testing with super stats.
         if self.name == 'AlexRocks':

@@ -6,6 +6,7 @@ __author__ = 'alex barnes'
 import random
 
 def roll100():
+    "Desc: roll values between 0 and 99"
     return random.randint(0,99)
 
 

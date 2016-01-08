@@ -8,15 +8,16 @@ import mechanics
 
 class mob(object):
     """
-    Abstract base class.
-    All non-player characters in the game will be based off of this base class.
-    Mobs should be built with a base agility of 10. Slower than that can cause high agility players to have too easy of a time. Faster than that can be overwhelming. Agility has a major impact on difficulty, due to the way turns happen.
+    abstract base class.
+    all non-player characters in the game will be based off of this base class.
+    mobs should be built with a base agility of 10. Slower than that can cause high agility players to have too easy of a time. Faster than that can be overwhelming. Agility has a major impact on difficulty, due to the way turns happen.
+    will make stats a dictionary in the future.
     """
     strg = agi = end = bdiff = ap = hp = chp = arm = 0
     name = title = desc = ""
 
     def calcArm(self, end):
-        "calculate Armor based on Agility"
+        "calculate Armor based on endurance"
         if end % 2 == 0:
             arm = end / 2
         else:
@@ -33,6 +34,7 @@ class mob(object):
         self.hp = self.chp = self.calcHP(self.end)
 
     def __init__(self):
+        #would like to implement a check to see if base class is being inited and raise error, otherwise calcStats()
         raise NotImplementedError
 
 
@@ -101,11 +103,14 @@ class dragon(mob):
 
 def pickMob(diff, debug=0):
     """
-    Handles rules for spawning monsters when entering a room. Logic is documented in readme
+    Desc: handles rules for spawning monsters when entering a room. Logic is documented in readme.
+    Called by: room.enter().
+
+    Notes:
     spawnRoll will determine if a monster will spawn. mightRoll will determine the might of a monster if it does spawn.
-    Both spawnRoll and mightRoll are handled differently based on difficulty of room.
-    If a monster is spawned, a mob of appropriate might will be chosen and returned. If a monster is not spawned, None will be returned.
-    Set debug = 1 for roll details
+    both spawnRoll and mightRoll are handled differently based on difficulty of room.
+    if a monster is spawned, a mob of appropriate might will be chosen and returned. If a monster is not spawned, None will be returned.
+    set debug = 1 for roll details
     diff -1 is for rooms that should never spawn a mob
     """
     spawnRoll = mechanics.roll100()
@@ -155,21 +160,21 @@ def pickMob(diff, debug=0):
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if mightRoll in range(0, 39):
-            # spawn hard
             return spawnMob(2, mightRoll)
         elif mightRoll in range(40, 94):
-            # spawn very hard
             return spawnMob(3, mightRoll)
         elif mightRoll in range(95, 99):
-            # spawn god-like
             return spawnMob(4, mightRoll)
 
 
 def spawnMob(diff, might):
     """
-    Returns a mob for a given difficulty
-    In the future, this will have several mob types per difficulty and use something like random.choice to pick one.
-    This function will call to the title assignment function, once implemented
+    Desc: returns a mob for a given difficulty
+    Called by: mobs.pickMob()
+
+    Notes:
+    in the future, this will have several mob types per difficulty and use something like random.choice to pick one.
+    this function will call to the title assignment function, once implemented
     """
     if diff == 0:
         return goblin()

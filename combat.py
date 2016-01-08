@@ -8,12 +8,20 @@ from time import sleep
 
 
 def pAttack(player, mob):
+    """
+    Desc: player's basic strength based attack
+    Called by: combat.combat()
+    """
     print "You attack the {} for {} damage!\n".format(mob.name, player.strg)
     mob.chp -= player.strg
     player.ap -= 100
 
 
 def mAttack(mob, player):
+    """
+    Desc: mob's basic strength based attack
+    Called by: combat.combat()
+    """
     print "The {} attacks you for {} damage!\n".format(mob.name, mob.strg)
     player.chp -= mob.strg
     mob.ap -= 100
