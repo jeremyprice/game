@@ -37,17 +37,17 @@ class map(object):
             pass
         elif chance in range(25, 29):
             if player.chp < player.hp:
-                print "This room has a small fountain containing clean water. You quickly drink it, restoring your health."
+                print "\nThis room has a small fountain containing clean water. You quickly drink it, restoring your health."
                 if (player.chp + 50) <= player.hp:
                     player.chp += 50
                 else:
                     player.chp = player.hp
             else:
-                print "This room has a small fountain containing clean water. You quickly drink it, but your health is already full."
+                print "\nThis room has a small fountain containing clean water. You quickly drink it, but your health is already full."
             player.showHP()
 
         elif chance in range(30, 34):
-            print "An imp throws a rock at you before disappearing in a puff of smoke."
+            print "\nAn imp throws a rock at you before disappearing in a puff of smoke."
             player.chp -= 5
             player.showHP()
 
@@ -55,7 +55,7 @@ class map(object):
             pass
 
         elif chance in (50, 51):
-            print "You find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(
+            print "\nYou find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(
                 player.arm + 2)
             player.arm += 2
 
@@ -64,8 +64,7 @@ class map(object):
 
         elif chance in (96, 97):
             # Keep this in mind once levels are implemented
-            print "A lost spirit appears to you. 'I perished here, like many before me. I give you my blessing, that you may find freedom again'. As the spirit disappears, you feel slightly more healthy. (Health permanently increased to  {}).".format(
-                player.hp + 30)
+            print "\nA lost spirit appears to you. 'Hail, {}. I perished here, like many before me. I give you my blessing, that you may find freedom again'. As the spirit disappears, you feel slightly more healthy. (Health permanently increased to {}).".format(player.name, player.hp + 30)
             player.hp += 30
             if (player.chp + 30) <= player.hp:
                 player.chp += 30
@@ -74,7 +73,7 @@ class map(object):
             player.showHP()
 
         elif chance == 98:
-            print "You find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
+            print "\nYou find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
                 player.agi + 1)
             player.agi += 1
 
@@ -165,7 +164,7 @@ class map(object):
         if exits > 3:
             print "4) {}".format(self.doorDesc(self.doorDiffs[3]))
 
-    def chooseDoor(self, doorDiffs, exits):
+    def chooseDoor(self, doorDiffs, exits, player):
         """
         Desc: prompts player for door choice and returns the new room.
         Called by: main game loop in game
@@ -185,7 +184,7 @@ class map(object):
                     if type(choice) == str:
                         if choice.lower() in ['exit', 'quit']:
                             print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
-                            exit()
+                            player.death()
                     print "That is not a valid choice."
             if choice > exits:
                 print "That is not a valid choice."
@@ -213,6 +212,7 @@ class map(object):
         """
         print ""
         print self.desc
+        player.roomCt += 1
         monster = mobs.pickMob(self.difficulty)
         if type(monster) != type(None):
             self.monCount += 1

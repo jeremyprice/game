@@ -20,15 +20,13 @@ def main():
             combat.combat(char, monster)
             currentRoom.monCount -= 1
             if char.chp < 1:
-                print "You have died, like many before you."
-                exit()
+                char.death()
         currentRoom.rollChance(char)
         currentRoom.nextRooms(currentRoom.exits)
-        currentRoom = currentRoom.chooseDoor(currentRoom.doorDiffs, currentRoom.exits)
+        currentRoom = currentRoom.chooseDoor(currentRoom.doorDiffs, currentRoom.exits, char)
 
     if char.chp < 1:
-        print "You have died, like many before you."
-        exit()
+        char.death()
 
 
 if __name__ == "__main__":

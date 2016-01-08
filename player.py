@@ -9,10 +9,10 @@ import random
 class player(object):
     """
     this object represents the player within the game. It handles creation and storage of all player statistics.
-    will chance stats to dictionary in the future
+    will change stats to dictionary in the future
     """
 
-    strg = agi = end = hp = chp = arm = ap = 0
+    strg = agi = end = hp = chp = arm = ap = roomCt = 0
     name = ""
 
     def rollStats(self):
@@ -33,6 +33,11 @@ class player(object):
     def showHP(self):
         "standard format to print players current HP"
         print "Player HP: {}/{} AP:{}/100".format(self.chp, self.hp, self.ap)
+
+    def death(self):
+        "called when the player dies"
+        print "{0} has died, like many before. {0} survived {1} rooms.".format(self.name, self.roomCt)
+        exit()
 
     def __str__(self):
         return "Your stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}".format(

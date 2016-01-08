@@ -34,6 +34,7 @@ Player will have a character that moves through rooms and randomly encounters mo
     -exp (experience): Allows player to level up. Gained by killing mobs.  (future).
     -name.
     -ap (action points): Used in combat to control turns. Influenced by agility. 
+    -roomCt (room count): Number of rooms the player has entered this game. Used to to give a chance to find the end. Incrimented in room.map.enter()
 
 - Equipment
 - Inventory
