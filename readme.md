@@ -21,12 +21,12 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Imports random
 + Imported by game
 
-+ Notes:
++Notes:
 - The players in-game avatar. Houses all player stats, skills etc.
 - Would like to add classes and races in the future. These will give skills and stat modifications.
 - Will house equipment once implemented.
 
-+ Attributes:
++Attributes:
 - strg (Strength): Determines how much damage player does with attacks.
 - agi (Agility): Determines chance to hit, chance to dodge(NI), how often you attack. 
 - end (Endurance): Determines base hit points and bonus armor. 
@@ -46,12 +46,12 @@ Player will have a character that moves through rooms and randomly encounters mo
 #####+------------------------------------------------------------+
 + Imported by room
 
-+ Notes:
++Notes:
 - Mobs are currently generated only based on the difficulty result. Room Difficulty influences the roll table for mobs.PickMob. Within the roll table, there is a spawn roll and a might roll. For any given difficulty, there is a value above which a spawn roll must be to spawn a mob. Once that spawn roll check is passed, the might roll determines the actual difficulty of the mob to be spawned. The might roll will land within a difficulty bucket, and a monster of that difficulty will be spawned using mobs.spawnMob.
  - Mobs will be generated based on the might value rolled (currently in mobs.pickMob). There will be basic types of mobs (goblin, dragon, skeleton etc.), and titles that act as modifiers for those types (weak, sly, vicious, champion etc) which will provide various stat modifications. Types will be based on a certain base value, for instance goblins will have a base might of 5. The range for a type, based on titles, will be something like plus or minus 25, meaning a roll of anywhere between 0 and 30 can get you a goblin. A roll of 0 would get you a weak goblin: weak (-5 from base) and goblin (base might of 5). There will be overlaps between types, so a roll of 60 may be you a strong skeleton or a weak dragon. 
  - Mobs are generated when a room is entered.
 
-+ Attributes:
++Attributes:
 - strg (Strength): Determines how much damage mob does with attacks.
 - agi (Agility): Determines chance to hit, chance to dodge(NI), how often mob attacks. 
 - end (Endurance): Determines base hit points and bonus armor. 
@@ -69,7 +69,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Imports mechanics, mob, random
 + Imported by game
 
-+ Notes
++Notes
 - Generates monster.
     - Based on difficulty of room. Chances:
         - An easy room: 50% chance to spawn an enemy. If there is an enemy, its might will be:
@@ -155,7 +155,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Ties all others together and runs the game
 
 
-+ Notes:
++Notes:
 - Basic flow of the game:
     - Create character
     - Spawn in beginning room
