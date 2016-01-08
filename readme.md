@@ -63,11 +63,10 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Title: Added to name, based on Might. Modifies stats (Not Implemented)
 - Desc (description): Short description of mob. Displayed when player enters a room with the mob. 
 
-```
+
 #####+------------------------------------------------------------+
 #####+                           Room                             +
 #####+------------------------------------------------------------+
-```
 + Imports mechanics, mob, random
 + Imported by game
 
