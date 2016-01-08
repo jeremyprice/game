@@ -2,9 +2,9 @@ Basic game written to practice python.
 
 Player will have a character that moves through rooms and randomly encounters monsters to fight. Possibility of finding equipment in rooms or from dead monsters.
 
-###+------------------------------------------------------------------------------------------------------------------------+
-###+!!!                                                      Files                                                       !!!+
-###+------------------------------------------------------------------------------------------------------------------------+
+####+------------------------------------------------------------+
+####+                        Files                               +
+####+------------------------------------------------------------+
 + Player - the character and their information.
 + Actions -  actions the player can take. (Not implemented)
 + Mob - enemies to fight, possibly allies or neutral characters in the future.
@@ -15,9 +15,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Mechanics - Misc game mechanics inherited by others. Base class.
 + Game - Ties all other classes together. Runs the game. 
 
-####+------------------------------------------------------------+
-####+                          Player                            +
-####+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                          Player                            +
+#####+------------------------------------------------------------+
 + Imports random
 + Imported by game
 
@@ -41,9 +41,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 - ap (Action points): Used in combat to control turns. Influenced by agility. 
 - roomCt (Room count): Number of rooms the player has entered this game. Used to to give a chance to find the end. Incremented in room.map.enter()
 
-+------------------------------------------------------------+
-+                            Mob                             +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                            Mob                             +
+#####+------------------------------------------------------------+
 + Imported by room
 
 + Notes:
@@ -63,9 +63,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Title: Added to name, based on Might. Modifies stats (Not Implemented)
 - Desc (description): Short description of mob. Displayed when player enters a room with the mob. 
 
-+------------------------------------------------------------+
-+                           Room                             +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                           Room                             +
+#####+------------------------------------------------------------+
 + Imports mechanics, mob, random
 + Imported by game
 
@@ -111,23 +111,23 @@ Player will have a character that moves through rooms and randomly encounters mo
 - exits (int): Number of choices for next room 
 - doorDiffs (Door difficulties) (list) = Difficulties corresponding to the exits for next rooms.
 
-+------------------------------------------------------------+
-+                          Items                             +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                          Items                             +
+#####+------------------------------------------------------------+
 (not implemented)
 - Stats
 - Location worn
 - Use
 
-+------------------------------------------------------------+
-+                          Skills                            +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                          Skills                            +
+#####+------------------------------------------------------------+
 (not implemented)
 - Effect?
 
-+------------------------------------------------------------+
-+                          Combat                            +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                          Combat                            +
+#####+------------------------------------------------------------+
 + Imports random, time
 + Imported by game 
 
@@ -136,9 +136,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Combat continues until either the mob or player die.
 - I plan to implement a prompt for the player once their AP reaches 100. This prompt will allow them to choose to attack, use a skill or use an item.
 
-+------------------------------------------------------------+
-+                          Mechanics                         +
-+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                          Mechanics                         +
+#####+------------------------------------------------------------+
 + Imported by room
 
 + Base level class
@@ -147,9 +147,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 
 - Rolls
 
-####+------------------------------------------------------------+
-####+                           Game                             +
-####+------------------------------------------------------------+
+#####+------------------------------------------------------------+
+#####+                           Game                             +
+#####+------------------------------------------------------------+
 + Imports room, player, combat
 
 + Ties all others together and runs the game
