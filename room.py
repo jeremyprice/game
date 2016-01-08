@@ -189,6 +189,8 @@ class map(object):
             if choice > exits:
                 print "That is not a valid choice."
                 choice = None
+            elif player.roomCt + mechanics.roll20() > 40:
+                newRoom = endRoom(player)
             elif choice == 1:
                 newRoom = miscRoom(doorDiffs[0])
             elif choice == 2:
@@ -271,9 +273,11 @@ class endRoom(map):
     Notes:
     I would like to build a leader board at some points.
     """
-    def __init__(self):
+    def __init__(self, player):
         self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
         self.difficulty = -1
+        print self.desc
+        player.win()
 
 
 def main():

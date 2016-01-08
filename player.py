@@ -25,8 +25,8 @@ class player(object):
         roll['agi'] = random.randint(1, 18)
         roll['end'] = random.randint(1, 18)
         # make sure total stars are between 15 and 45, if not reroll
-        while (roll['strg'] + roll['agi'] + roll['end']) >= 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25 or \
-                        roll['strg'] < 4 or roll['agi'] < 4 or roll['end'] < 4:
+        while (roll['strg'] + roll['agi'] + roll['end']) > 45 or (roll['strg'] + roll['agi'] + roll['end']) <= 25 or \
+                        roll['strg'] < 5 or roll['agi'] < 8 or roll['end'] < 5:
             roll = self.rollStats()
         return roll
 
@@ -37,6 +37,11 @@ class player(object):
     def death(self):
         "called when the player dies"
         print "{0} has died, like many before. {0} survived {1} rooms.".format(self.name, self.roomCt)
+        exit()
+
+    def win(self):
+        "called when the player wins the game"
+        print "\n{0} has escaped the dungeon, as few before have. {0} survived {1} rooms.\n".format(self.name, self.roomCt)
         exit()
 
     def __str__(self):

@@ -103,6 +103,8 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Difficulty: Value 0 through 99. To begin with, these with break down into easy (0 - 24), medium (25 - 74), hard (75 - 89), and very hard (90 - 99).
 - Chance: Value 0 through 99. Chance that a special event will occur in a room. Things such as free healing, automatic damage etc.
 - Description: At first, description will randomly pull from a list of prewritten strings. May change this in the future to use an external flat file.
+- The chance to enter the winning room will be based on the number of rooms the player has already entered. if player.roomCt + luck(not implemented) + roll20 > 40 ?
+- roomCt will also influence the difficulty of next room options, constantly increasing it.
 
 
 +Attributes:
@@ -172,3 +174,18 @@ Player will have a character that moves through rooms and randomly encounters mo
         - Fight monster until either the monster of player's HP reaches < 1
         - Chance event, if any, takes place
         - Player selects next room
+        
+        
+###### To do:
+- Write a prompt to replace the current checks in room.chooseDoor
+- Add help command
+- Add skills
+- Add classes
+- Add races
+- Add levels
+- Add monster 
+- Added items and inventory
+- Change roll100 to return 1 through 100 (instead of 0 through 99)
+- Increase difficulty based on roomCt
+- Add difficulty option
+- Add type guard for name
