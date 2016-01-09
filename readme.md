@@ -47,9 +47,10 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Imported by room
 
 +Notes:
-- Mobs are currently generated only based on the difficulty result. Room Difficulty influences the roll table for mobs.PickMob. Within the roll table, there is a spawn roll and a might roll. For any given difficulty, there is a value above which a spawn roll must be to spawn a mob. Once that spawn roll check is passed, the might roll determines the actual difficulty of the mob to be spawned. The might roll will land within a difficulty bucket, and a monster of that difficulty will be spawned using mobs.spawnMob.
+- Mobs are currently generated only based on the difficulty result. Room Difficulty influences the roll table for mobs.PickMob. Within the roll table, there is a spawn roll and a might roll. For any given difficulty, there is a value above which a spawn roll must be to spawn a mob. Once that spawn roll check is passed, the might roll determines the actual difficulty of the mob to be spawned. The might roll will land within a difficulty bucket, and a monster of that difficulty will be spawned using mobs.mobLoader.
  - Mobs will be generated based on the might value rolled (currently in mobs.pickMob). There will be basic types of mobs (goblin, dragon, skeleton etc.), and titles that act as modifiers for those types (weak, sly, vicious, champion etc) which will provide various stat modifications. Types will be based on a certain base value, for instance goblins will have a base might of 5. The range for a type, based on titles, will be something like plus or minus 25, meaning a roll of anywhere between 0 and 30 can get you a goblin. A roll of 0 would get you a weak goblin: weak (-5 from base) and goblin (base might of 5). There will be overlaps between types, so a roll of 60 may be you a strong skeleton or a weak dragon. 
  - Mobs are generated when a room is entered.
+ - Mobs are loaded from an external file, ./resources/mobs.json , and new mobs can be easily added there.
 
 +Attributes:
 - strg (Strength): Determines how much damage mob does with attacks.
@@ -189,3 +190,4 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Increase difficulty based on roomCt
 - Add difficulty option
 - Add type guard for name
+- Move misc. room descriptions to an external file

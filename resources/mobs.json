@@ -1,0 +1,78 @@
+[
+{
+  "name": "Goblin",
+  "stats": {
+    "strg": 2,
+    "agi": 10,
+    "end": 2,
+    "bdiff": 0
+  },
+  "desc": "A small green goblin is here, scratching himself"
+},
+
+{
+  "name": "Kobold",
+  "stats": {
+    "strg": 2,
+    "agi": 10,
+    "end": 2,
+    "bdiff": 0
+  },
+  "desc": "A small kobold is here, digging at the walls"
+},
+
+{
+  "name": "Skeleton",
+  "stats": {
+    "strg": 4,
+    "agi": 10,
+    "end": 4,
+    "bdiff": 1
+  },
+  "desc": "A skeleton is here, rattling his bones"
+},
+
+{
+  "name": "Ghoul",
+  "stats": {
+    "strg": 6,
+    "agi": 8,
+    "end": 6,
+    "bdiff": 1
+  },
+  "desc": "A ghoul is here, moaning loadly"
+},
+
+{
+  "name": "Orc",
+  "stats": {
+    "strg": 8,
+    "agi": 10,
+    "end": 5,
+    "bdiff": 2
+  },
+  "desc": "A large green orc is here, banging his shield"
+},
+
+{
+  "name": "Elemental",
+  "stats": {
+    "strg": 10,
+    "agi": 10,
+    "end": 8,
+    "bdiff": 3
+  },
+  "desc": "A fire elemental is here, burning furiously"
+},
+
+{
+  "name": "Dragon",
+  "stats": {
+    "strg": 18,
+    "agi": 8,
+    "end": 14,
+    "bdiff": 4
+  },
+  "desc": "A huge dragon is here, chewing the bones of its last victim"
+}
+]

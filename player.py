@@ -49,9 +49,13 @@ class player(object):
             self.strg, self.agi, self.end, self.hp, self.arm)
 
     def __init__(self):
-        print "Creating character."
-        print ""
-        self.name = str(raw_input("What is your name, traveler? "))
+        print "Creating character.\n"
+
+        while len(self.name) < 1:
+            try:
+                self.name = str(raw_input("What is your name, traveler? "))
+            except:
+                print "That is not a valid name."
 
         print "You will have three rolls to choose from."
         print "Rolling stats."

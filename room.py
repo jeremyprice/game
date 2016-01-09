@@ -274,7 +274,7 @@ class endRoom(map):
     I would like to build a leader board at some points.
     """
     def __init__(self, player):
-        self.desc = "You step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
+        self.desc = "\nYou step through the door and are immediately blinded by bright light. You smell fresh air and feel a breeze on your bloody and bruised face. As your eyes adjust, you see stone steps leading up to the surface. You've survived."
         self.difficulty = -1
         print self.desc
         player.win()

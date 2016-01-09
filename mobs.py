@@ -4,11 +4,22 @@
 __author__ = 'alex barnes'
 
 import mechanics
+import simplejson, random
+
+#load mob data from external json file
+with open('/Users/alex8955/PycharmProjects/misc/game/resources/mobs.json') as mobjson:
+    mobData = simplejson.load(mobjson)
+
+#initialize empty mob index
+mobIndex = {0:[], 1:[], 2:[], 3:[], 4:[]}
+
+#fill mob index. This is used by mobLoader() to build mobs.
+for i, data in enumerate(mobData):
+     mobIndex[data['stats']['bdiff']].append(i)
 
 
 class mob(object):
     """
-    abstract base class.
     all non-player characters in the game will be based off of this base class.
     mobs should be built with a base agility of 10. Slower than that can cause high agility players to have too easy of a time. Faster than that can be overwhelming. Agility has a major impact on difficulty, due to the way turns happen.
     will make stats a dictionary in the future.
@@ -33,71 +44,12 @@ class mob(object):
         self.arm = self.calcArm(self.end)
         self.hp = self.chp = self.calcHP(self.end)
 
-    def __init__(self):
-        #would like to implement a check to see if base class is being inited and raise error, otherwise calcStats()
-        raise NotImplementedError
-
-
-### Monster definitions ###
-# in the future, these will be reworked into a flat file
-
-class goblin(mob):
-    name = "Goblin"
-    strg = 2
-    agi = 10
-    end = 2
-    bdiff = 0
-    desc = "A small green goblin is here, scratching himself"
-
-    def __init__(self):
-        self.calcStats()
-
-
-class skeleton(mob):
-    name = "Skeleton"
-    strg = 4
-    agi = 10
-    end = 4
-    bdiff = 1
-    desc = "A skeleton is here, rattling his bones"
-
-    def __init__(self):
-        self.calcStats()
-
-
-class orc(mob):
-    name = "Orc"
-    strg = 8
-    agi = 10
-    end = 4
-    bdiff = 2
-    desc = "A large green orc is here, banging his shield"
-
-    def __init__(self):
-        self.calcStats()
-
-
-class elemental(mob):
-    name = "Elemental"
-    strg = 10
-    agi = 10
-    end = 8
-    bdiff = 3
-    desc = "A fire elemental is here, burning furiously"
-
-    def __init__(self):
-        self.calcStats()
-
-
-class dragon(mob):
-    name = "Dragon"
-    strg = 18
-    agi = 8
-    end = 14
-    bdiff = 4
-    desc = "A huge dragon is here, chewing the bones of its last victim"
-
-    def __init__(self):
+    def __init__(self, stats, name, desc):
+        self.strg = stats['strg']
+        self.agi = stats['agi']
+        self.end = stats['end']
+        self.name = name
+        self.desc = desc
         self.calcStats()
 
 
@@ -122,11 +74,11 @@ def pickMob(diff, debug=0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
             if mightRoll in range(0, 66):
-                return spawnMob(0, mightRoll)
+                return mobLoader(0)
             elif mightRoll in range(67, 98):
-                return spawnMob(1, mightRoll)
+                return mobLoader(1)
             elif mightRoll == 99:
-                return spawnMob(2, mightRoll)
+                return mobLoader(2)
         else:
             return None
     elif diff == 1:
@@ -134,13 +86,13 @@ def pickMob(diff, debug=0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 49:
             if mightRoll in range(0, 19):
-                return spawnMob(0, mightRoll)
+                return mobLoader(0)
             elif mightRoll in range(20, 85):
-                return spawnMob(1, mightRoll)
+                return mobLoader(1)
             elif mightRoll in range(86, 98):
-                return spawnMob(2, mightRoll)
+                return mobLoader(2)
             elif mightRoll == 99:
-                return spawnMob(3, mightRoll)
+                return mobLoader(3)
         else:
             return None
     elif diff == 2:
@@ -148,11 +100,11 @@ def pickMob(diff, debug=0):
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if spawnRoll > 19:
             if mightRoll in range(0, 19):
-                return spawnMob(1, mightRoll)
+                return mobLoader(1)
             elif mightRoll in range(20, 85):
-                return spawnMob(2, mightRoll)
+                return mobLoader(2)
             elif mightRoll in range(86, 99):
-                return spawnMob(3, mightRoll)
+                return mobLoader(3)
         else:
             return None
     else:
@@ -160,32 +112,27 @@ def pickMob(diff, debug=0):
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
         if mightRoll in range(0, 39):
-            return spawnMob(2, mightRoll)
+            return mobLoader(2)
         elif mightRoll in range(40, 94):
-            return spawnMob(3, mightRoll)
+            return mobLoader(3)
         elif mightRoll in range(95, 99):
-            return spawnMob(4, mightRoll)
+            return mobLoader(4)
 
 
-def spawnMob(diff, might):
+def mobLoader(diff):
     """
-    Desc: returns a mob for a given difficulty
+    Desc: Constructs a mob object based on data loaded from ./resources/mobs.json
     Called by: mobs.pickMob()
 
     Notes:
-    in the future, this will have several mob types per difficulty and use something like random.choice to pick one.
-    this function will call to the title assignment function, once implemented
+    mobIndex[diff] uses the difficulty handed into the function to look into the mobIndex and get a list of index locations inside mobData that contain mobs of the requested difficulty.
+    random.choice is used to pick one of those mobs at random
+    chosenMob = mobData[] sets chosenMob to the data set for the randomly selected mob of the requested difficulty
+    newMob = ... hands the data into the mob classes __init__ in its required format
     """
-    if diff == 0:
-        return goblin()
-    elif diff == 1:
-        return skeleton()
-    elif diff == 2:
-        return orc()
-    elif diff == 3:
-        return elemental()
-    elif diff == 4:
-        return dragon()
+    chosenMob = mobData[random.choice(mobIndex[diff])]
+    newMob = mob(chosenMob['stats'], chosenMob['name'], chosenMob['desc'])
+    return newMob
 
 
 def main():
