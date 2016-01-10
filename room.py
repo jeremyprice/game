@@ -185,7 +185,12 @@ class map(object):
                         if choice.lower() in ['exit', 'quit']:
                             print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
                             player.death()
-                    print "That is not a valid choice."
+                        elif choice.lower() == 'help':
+                            print mechanics.actions.help()
+                        else:
+                            print "That is not a valid choice."
+                    else:
+                        print "That is not a valid choice."
             if choice > exits:
                 print "That is not a valid choice."
                 choice = None

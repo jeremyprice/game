@@ -14,13 +14,13 @@ class action(object):
 
     def __str__(self):
         if self.name == "help":
-            return self.desc
+            return self.helpTxt
         else:
             return self.desc + "See help {} for more details.".format(self.name)
 
 class help(action):
-    def __init__(self, topic):
-        action.__init__(
+    def __init__(self):
+        super(help, self).__init__(
             name = "help",
             desc = "Display help for a topic, or the general help file.",
             helpTxt = """The basic commands in Pygame are:

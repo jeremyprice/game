@@ -3,6 +3,8 @@
 
 __author__ = 'alex barnes'
 
+import actions
+
 import random
 
 def roll100():
@@ -15,7 +17,7 @@ def roll20():
 
 def prompt(player, room, mob = None):
     command = raw_input(player.showHP() + ">")
-    
+
 
 
 def main():
