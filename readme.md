@@ -3,7 +3,7 @@ Basic game written to practice python.
 Player will have a character that moves through rooms and randomly encounters monsters to fight. Possibility of finding equipment in rooms or from dead monsters.
 
 ####+------------------------------------------------------------+
-####+                        Files                               +
+####+                        Modules                             +
 ####+------------------------------------------------------------+
 + Player - the character and their information.
 + Actions -  actions the player can take. (Not implemented)
@@ -13,7 +13,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Skills? - special skills for player. (Not implemented)
 + Combat - Mechanics for battle between player and mobs.
 + Mechanics - Misc game mechanics inherited by others. Base class.
-+ Game - Ties all other classes together. Runs the game. 
++ Game - Ties all other modules together. Runs the game. 
 
 #####+------------------------------------------------------------+
 #####+                          Player                            +
@@ -184,10 +184,9 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Add classes
 - Add races
 - Add levels
-- Add monster 
+- Add monster titles
 - Added items and inventory
 - Change roll100 to return 1 through 100 (instead of 0 through 99)
 - Increase difficulty based on roomCt
 - Add difficulty option
-- Add type guard for name
 - Move misc. room descriptions to an external file

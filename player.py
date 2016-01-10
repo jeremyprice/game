@@ -31,16 +31,16 @@ class player(object):
         return roll
 
     def showHP(self):
-        "standard format to print players current HP"
+        """standard format to print players current HP"""
         print "Player HP: {}/{} AP:{}/100".format(self.chp, self.hp, self.ap)
 
     def death(self):
-        "called when the player dies"
+        """called when the player dies"""
         print "{0} has died, like many before. {0} survived {1} rooms.".format(self.name, self.roomCt)
         exit()
 
     def win(self):
-        "called when the player wins the game"
+        """called when the player wins the game"""
         print "\n{0} has escaped the dungeon, as few before have. {0} survived {1} rooms.\n".format(self.name, self.roomCt)
         exit()
 

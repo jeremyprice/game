@@ -13,8 +13,10 @@ def roll20():
     return random.randint(1,20)
 
 
-def prompt(player, room, mob):
-    pass
+def prompt(player, room, mob = None):
+    command = raw_input(player.showHP() + ">")
+    
+
 
 def main():
     pass
