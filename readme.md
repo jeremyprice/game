@@ -15,6 +15,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 + Mechanics - Misc game mechanics inherited by others. Base class.
 + Game - Ties all other modules together. Runs the game. 
 
+
 #####+------------------------------------------------------------+
 #####+                          Player                            +
 #####+------------------------------------------------------------+
@@ -39,7 +40,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 - exp (Experience): Allows player to level up. Gained by killing mobs.  (Not Implemented).
 - name.
 - ap (Action points): Used in combat to control turns. Influenced by agility. 
-- roomCt (Room count): Number of rooms the player has entered this game. Used to to give a chance to find the end. Incremented in room.map.enter()
+- roomCt (Room count): Number of rooms the player has entered this game. Used to to give a chance to find the end. Incremented in room.map.enter
 
 #####+------------------------------------------------------------+
 #####+                            Mob                             +
@@ -154,7 +155,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 #####+------------------------------------------------------------+
 #####+                           Game                             +
 #####+------------------------------------------------------------+
-+ Imports room, player, combat
++ Imports room, player, combat, actions
 
 + Ties all others together and runs the game
 
@@ -178,8 +179,6 @@ Player will have a character that moves through rooms and randomly encounters mo
         
         
 ###### To do:
-- Write a prompt to replace the current checks in room.chooseDoor
-- Add help command
 - Add skills
 - Add classes
 - Add races
@@ -190,3 +189,4 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Increase difficulty based on roomCt
 - Add difficulty option
 - Move misc. room descriptions to an external file
+- Add modifiers to rolls ex mechanics.roll20(1) would be the roll +1

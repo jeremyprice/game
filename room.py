@@ -8,7 +8,7 @@ import mechanics
 import mobs
 
 
-class map(object):
+class maps(object):
     __str__ = "Base class for generating and managing rooms in pygame."
 
     difficulty = 0
@@ -84,7 +84,7 @@ class map(object):
     def rollDiff(self):
         """
         Desc: determines the difficulty of a room.
-        Called by: room.map.rollNextRooms()
+        Called by: room.maps.rollNextRooms()
 
         Notes:
         the difficulty will be used to modify monster stats, and perhaps item drops.
@@ -103,7 +103,7 @@ class map(object):
     def rollExits(self):
         """
         Desc: determines how many exits a given room has.
-        Called by: room.map.miscRoom.__init__()
+        Called by: room.maps.miscRoom.__init__()
         """
         exitsRoll = mechanics.roll100()
         # exits are bucketed similar to difficulty
@@ -119,7 +119,7 @@ class map(object):
     def rollNextRooms(self):
         """
         Desc: chooses the difficulty for each next door.
-        Called by: room.map.miscRoom.__init__()
+        Called by: room.maps.miscRoom.__init__()
 
         Notes:
         ensures that each door is a different difficulty."""
@@ -134,7 +134,7 @@ class map(object):
     def doorDesc(self, diff):
         """
         Desc: returns door descriptions
-        Called by: room.map.nextRooms()
+        Called by: room.maps.nextRooms()
         """
         if diff == 0:
             return "This wooden door feels warm and inviting."
@@ -148,7 +148,7 @@ class map(object):
     def nextRooms(self, exits):
         """
         Desc: displays exits for the next rooms.
-        Called by: room.map.miscRoom.__init__() and main game loop in game
+        Called by: room.maps.miscRoom.__init__() and main game loop in game
         """
         if exits > 1:
             print ""
@@ -164,39 +164,6 @@ class map(object):
         if exits > 3:
             print "4) {}".format(self.doorDesc(self.doorDiffs[3]))
 
-    def chooseDoor(self, doorDiffs, exits, player):
-        """
-        Desc: prompts player for door choice and returns the new room.
-        Called by: main game loop in game
-
-        Notes:
-        receives the difficulty number for each possible door but only the actual number of exits to display.
-        this is the conduit for the main prompt for the player (mechanics.prompt). I plan to rewrite this so the prompt contains the door choice and is in the main game loop.
-        """
-        newRoom = None
-        choice = None
-        while not newRoom:
-            choice = mechanics.prompt(player, self)
-            if choice > exits:
-                print "That is not a valid door."
-                choice = None
-            elif player.roomCt + mechanics.roll20() > 40:
-                newRoom = endRoom(player)
-            elif choice == 1:
-                newRoom = miscRoom(doorDiffs[0])
-            elif choice == 2:
-                newRoom = miscRoom(doorDiffs[1])
-            elif choice == 3:
-                newRoom = miscRoom(doorDiffs[2])
-            elif choice == 4:
-                newRoom = miscRoom(doorDiffs[3])
-            else:
-                if choice == -1:
-                    pass
-                else:
-                    print "That is not a valid command. Please enter a valid command or type 'help'."
-                    choice = None
-        return newRoom
 
     def enter(self, player):
         """
@@ -220,11 +187,11 @@ class map(object):
             return None
 
 
-class miscRoom(map):
+class miscRoom(maps):
     def rollDesc(self):
         """
         Desc: randomly assigned descriptions to rooms.
-        Called by: room.map.miscRoom.__init__()
+        Called by: room.maps.miscRoom.__init__()
 
         Notes:
         in the future, I plan to move these out to a flat file which will be read from.
@@ -250,7 +217,7 @@ class miscRoom(map):
         self.rollNextRooms()
 
 
-class startRoom(map):
+class startRoom(maps):
     def __init__(self):
         self.exits = 1
         self.desc = "You awaken in a cramped stone cell. Your head aches and you have no memory of how you came to be here. There are a few items bundled together in the center of the room, and the door hangs slightly open. You hear the distant sound of creatures in the darkness beyond."
@@ -259,7 +226,7 @@ class startRoom(map):
         pass
 
 
-class endRoom(map):
+class endRoom(maps):
     """
     Desc: this is the room that must be reached in order to win the game.
 
@@ -275,6 +242,7 @@ class endRoom(map):
 
 def main():
     room1 = miscRoom(1)
+
 
     print "Room debug info:"
     print "Difficulty - {},".format(room1.difficulty)

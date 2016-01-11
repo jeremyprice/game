@@ -45,8 +45,8 @@ class player(object):
         exit()
 
     def __str__(self):
-        return "Your stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}".format(
-            self.strg, self.agi, self.end, self.hp, self.arm)
+        return "\n{}'s stats are: \nStrength: {} \nAgility: {} \nEndurance: {} \nHit Points: {} \nArmor: {}\n".format(
+            self.name, self.strg, self.agi, self.end, self.hp, self.arm)
 
     def __init__(self):
         print "Creating character.\n"
