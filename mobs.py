@@ -27,6 +27,9 @@ class mob(object):
     strg = agi = end = bdiff = ap = hp = chp = arm = 0
     name = title = desc = ""
 
+    def showHP(self):
+        return "{} HP: {}/{} AP:{}/100".format(self.name, self.chp, self.hp, self.ap)
+
     def calcArm(self, end):
         "calculate Armor based on endurance"
         if end % 2 == 0:

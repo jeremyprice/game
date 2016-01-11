@@ -33,7 +33,8 @@ def combat(player, mob):
         while player.ap < 100 and mob.ap < 100:
             player.ap += player.agi
             mob.ap += mob.agi
-            print "Player HP: {}/{} AP:{}/100 \nMob HP: {}/{} AP:{}/100\n".format(player.chp, player.hp, player.ap, mob.chp, mob.hp, mob.ap)
+            print player.showHP()
+            print mob.showHP() + '\n'
             sleep(.5)
         if player.ap >= 100 and mob.ap <= 100:
             pAttack(player, mob)
@@ -49,7 +50,7 @@ def combat(player, mob):
     if mob.chp <= 0:
         print "You have killed the {}!\n".format(mob.name)
         player.ap = 0
-        player.showHP()
+        print player.showHP()
     elif player.chp <= 0:
         print "You have been defeated by the {}!".format(mob.name)
 

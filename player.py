@@ -32,7 +32,7 @@ class player(object):
 
     def showHP(self):
         """standard format to print players current HP"""
-        print "Player HP: {}/{} AP:{}/100".format(self.chp, self.hp, self.ap)
+        return "{} HP: {}/{} AP:{}/100".format(self.name, self.chp, self.hp, self.ap)
 
     def death(self):
         """called when the player dies"""

@@ -44,12 +44,12 @@ class map(object):
                     player.chp = player.hp
             else:
                 print "\nThis room has a small fountain containing clean water. You quickly drink it, but your health is already full."
-            player.showHP()
+            print player.showHP()
 
         elif chance in range(30, 34):
             print "\nAn imp throws a rock at you before disappearing in a puff of smoke."
             player.chp -= 5
-            player.showHP()
+            print player.showHP()
 
         elif chance in range(35, 49):
             pass
@@ -70,7 +70,7 @@ class map(object):
                 player.chp += 30
             else:
                 player.chp = player.hp
-            player.showHP()
+            print player.showHP()
 
         elif chance == 98:
             print "\nYou find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
@@ -171,28 +171,14 @@ class map(object):
 
         Notes:
         receives the difficulty number for each possible door but only the actual number of exits to display.
-        this is the main prompt for the player currently. it will have its functionality greatly expanded and may need to move into mechanics
+        this is the conduit for the main prompt for the player (mechanics.prompt). I plan to rewrite this so the prompt contains the door choice and is in the main game loop.
         """
         newRoom = None
         choice = None
         while not newRoom:
-            while type(choice) != int:
-                try:
-                    choice = raw_input("Which exit will you take? ")
-                    choice = int(choice)
-                except:
-                    if type(choice) == str:
-                        if choice.lower() in ['exit', 'quit']:
-                            print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
-                            player.death()
-                        elif choice.lower() == 'help':
-                            print mechanics.actions.ghelp()
-                        else:
-                            print "That is not a valid choice."
-                    else:
-                        print "That is not a valid choice."
+            choice = mechanics.prompt(player, self)
             if choice > exits:
-                print "That is not a valid choice."
+                print "That is not a valid door."
                 choice = None
             elif player.roomCt + mechanics.roll20() > 40:
                 newRoom = endRoom(player)
@@ -205,8 +191,11 @@ class map(object):
             elif choice == 4:
                 newRoom = miscRoom(doorDiffs[3])
             else:
-                print "That is not a valid choice."
-                choice = None
+                if choice == -1:
+                    pass
+                else:
+                    print "That is not a valid command. Please enter a valid command or type 'help'."
+                    choice = None
         return newRoom
 
     def enter(self, player):

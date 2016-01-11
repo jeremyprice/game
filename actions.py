@@ -37,6 +37,17 @@ class look(action):
             helpTxt = "Displays the room's description and exit information."
         )
         print room.desc
+        room.nextRooms(room.exits)
+
+class quit(action):
+    def __init__(self, player):
+        super(quit, self).__init__(
+            name = "quit",
+            desc = "Quit the game.",
+            helpTxt = "Quit the game, losing all progress. Synonym of exit."
+        )
+        print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
+        player.death()
 
 
 def main():
