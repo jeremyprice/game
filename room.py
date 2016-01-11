@@ -186,7 +186,7 @@ class map(object):
                             print "\nYou no longer have the strength to continue on. You hear what sounds like laughter far off in the dungeon as you lay down and die.\n"
                             player.death()
                         elif choice.lower() == 'help':
-                            print mechanics.actions.help()
+                            print mechanics.actions.ghelp()
                         else:
                             print "That is not a valid choice."
                     else:
@@ -259,7 +259,6 @@ class miscRoom(map):
         self.rollDesc()
         self.exits = self.rollExits()
         self.rollNextRooms()
-        pass
 
 
 class startRoom(map):
