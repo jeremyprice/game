@@ -9,10 +9,11 @@ import mechanics
 
 class action(object):
     """base class for all actions
-    all actions need to be plugged into the mechanics.prompt"""
+    all actions need to be plugged into the game.prompt"""
+
     def __init__(self, name, desc, helpTxt, shortcut = None, **kwargs):
         self.name = name
-        self. desc = desc
+        self.desc = desc
         self.helpTxt = helpTxt
         self.shortcut = shortcut
         self.kwargs = kwargs
@@ -27,16 +28,14 @@ class ghelp(action):
     def __init__(self, target = 'help'):
         super(ghelp, self).__init__(
             name = "help",
-            desc = "Display help for a topic, or the general help file. help with no argument displays this help file.",
-            helpTxt = "Not currently implemented"
+            desc = "Display help for a topic, or the general help file.",
+            helpTxt = """The basic commands in Pygame are:
+                help: Display help for a given topic, of the general help file if no topic is given.
+                enter: Enter a door.
+                look: Display a rooms information.
+                status: Display player's information.
+                quit or exit: Exit the game, losing all progress."""
         )
-            #helpTxt = """The basic commands in Pygame are:
-                #help <topic>: {0}.
-                #enter: {1}
-                #look: {2}
-                #status: {3}
-                #quit: {4}"""
-        #).format(ghelp.desc, enter.desc, look.desc, status.desc, quit.desc)
 
 class enter(action):
     newRoom = None
