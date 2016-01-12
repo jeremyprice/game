@@ -7,7 +7,7 @@ import mechanics
 import simplejson, random
 
 #load mob data from external json file
-with open('/Users/alex8955/PycharmProjects/misc/game/resources/mobs.json') as mobjson:
+with open('./resources/mobs.json') as mobjson:
     mobData = simplejson.load(mobjson)
 
 #initialize empty mob index

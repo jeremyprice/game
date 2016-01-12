@@ -31,7 +31,7 @@ class ghelp(action):
             desc = "Display help for a topic, or the general help file.",
             helpTxt = """The basic commands in Pygame are:
                 help: Display help for a given topic, of the general help file if no topic is given.
-                enter: Enter a door.
+                enter: Enter a door. (You can also just enter the number of the door).
                 look: Display a rooms information.
                 status: Display player's information.
                 quit or exit: Exit the game, losing all progress."""

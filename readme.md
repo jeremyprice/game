@@ -184,7 +184,7 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Add races
 - Add levels
 - Add monster titles
-- Added items and inventory
+- Add items and inventory
 - Change roll100 to return 1 through 100 (instead of 0 through 99)
 - Increase difficulty based on roomCt
 - Add difficulty option
