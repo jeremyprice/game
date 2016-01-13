@@ -16,9 +16,9 @@ def combat(player, mob):
             print player.showHP()
             print mob.showHP() + '\n'
             sleep(.5)
-        if player.ap >= 100 and mob.ap <= 100:
+        if player.ap >= 100 and mob.ap < 100:
             player.attack(mob)
-        elif mob.ap >= 100 and player.ap <= 100:
+        elif mob.ap >= 100 and player.ap < 100:
             mob.attack(player)
         elif player.ap >= 100 and mob.ap >= 100:
             if player.agi > mob.agi:
