@@ -104,10 +104,7 @@ class player(object):
 
         # set secondary stats based on primary
         self.hp = self.chp = 100 + (self.end * 5)
-        if self.end % 2 == 0:
-            self.arm = self.end / 2
-        else:
-            self.arm = (self.end - 1) / 2
+        self.arm = self.end / 2
 
         print ""
         print "Hail, {}.".format(self.name)

@@ -30,10 +30,7 @@ class mob(object):
 
     def calcArm(self, end):
         "calculate Armor based on endurance"
-        if end % 2 == 0:
-            arm = end / 2
-        else:
-            arm = (end - 1) / 2
+        arm = end / 2
         return arm
 
     def calcHP(self, end):

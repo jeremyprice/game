@@ -21,7 +21,7 @@ def prompt(player, room):
     command = None
     while not command:
         commandFull = raw_input(player.showHP() + ">")
-        parts = commandFull.lower.split(' ')
+        parts = commandFull.lower().split(' ')
         command = parts[0]
         args = parts[1:]
     if command in ('1','2','3','4','enter'):
@@ -63,7 +63,7 @@ def main():
         #check to see if a monster is in the room, if so set it to monster
         monster = currentRoom.enter(char)
         #if there is a monster in the room, begin combat
-        while currentRoom.monCount > 0 and type(monster) != type(None):
+        while currentRoom.monCount > 0 and monster != None:
             combat.combat(char, monster)
             currentRoom.monCount -= 1
             if char.chp < 1:
