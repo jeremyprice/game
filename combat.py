@@ -7,26 +7,6 @@ import random
 from time import sleep
 
 
-def pAttack(player, mob):
-    """
-    Desc: player's basic strength based attack
-    Called by: combat.combat()
-    """
-    print "You attack the {} for {} damage!\n".format(mob.name, player.strg)
-    mob.chp -= player.strg
-    player.ap -= 100
-
-
-def mAttack(mob, player):
-    """
-    Desc: mob's basic strength based attack
-    Called by: combat.combat()
-    """
-    print "The {} attacks you for {} damage!\n".format(mob.name, mob.strg)
-    player.chp -= mob.strg
-    mob.ap -= 100
-
-
 def combat(player, mob):
     print "Prepare to face off against the {}!".format(mob.name)
     while player.chp > 0 and mob.chp > 0:
@@ -37,16 +17,16 @@ def combat(player, mob):
             print mob.showHP() + '\n'
             sleep(.5)
         if player.ap >= 100 and mob.ap <= 100:
-            pAttack(player, mob)
+            player.attack(mob)
         elif mob.ap >= 100 and player.ap <= 100:
-            mAttack(mob, player)
+            mob.attack(player)
         elif player.ap >= 100 and mob.ap >= 100:
             if player.agi > mob.agi:
-                pAttack(player, mob)
+                player.attack(mob)
             elif player.agi <= mob.agi:
-                mAttack(mob, player)
+                mob.attack(player)
             else:
-                random.choice(pAttack(player, mob), mAttack(mob, player))
+                random.choice(player.attack(mob), mob.attack(player))
     if mob.chp <= 0:
         print "You have killed the {}!\n".format(mob.name)
         player.ap = 0

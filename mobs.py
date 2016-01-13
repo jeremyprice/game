@@ -47,6 +47,18 @@ class mob(object):
         self.arm = self.calcArm(self.end)
         self.hp = self.chp = self.calcHP(self.end)
 
+    def attack(self, player):
+        if self.strg - player.arm > 1:
+            dmg = player.strg - self.arm
+        else:
+            dmg = 1
+        if dmg > 1:
+            print "The {} attacks you for {} damage!\n".format(self.name, dmg)
+            player.chp -= dmg
+        else:
+            print "The {} lands a glancing blow!\n".format(self.name)
+        self.ap -= 100
+
     def __init__(self, stats, name, desc):
         self.strg = stats['strg']
         self.agi = stats['agi']
@@ -75,38 +87,38 @@ def pickMob(diff, debug=0):
     elif diff == 0:
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
-        if spawnRoll > 49:
-            if mightRoll in range(0, 66):
+        if spawnRoll > 50:
+            if mightRoll in range(1, 67):
                 return mobLoader(0)
-            elif mightRoll in range(67, 98):
+            elif mightRoll in range(68, 99):
                 return mobLoader(1)
-            elif mightRoll == 99:
+            elif mightRoll == 100:
                 return mobLoader(2)
         else:
             return None
     elif diff == 1:
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
-        if spawnRoll > 49:
-            if mightRoll in range(0, 19):
+        if spawnRoll > 50:
+            if mightRoll in range(1, 20):
                 return mobLoader(0)
-            elif mightRoll in range(20, 85):
+            elif mightRoll in range(21, 86):
                 return mobLoader(1)
-            elif mightRoll in range(86, 98):
+            elif mightRoll in range(87, 99):
                 return mobLoader(2)
-            elif mightRoll == 99:
+            elif mightRoll == 100:
                 return mobLoader(3)
         else:
             return None
     elif diff == 2:
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
-        if spawnRoll > 19:
-            if mightRoll in range(0, 19):
+        if spawnRoll > 20:
+            if mightRoll in range(1, 20):
                 return mobLoader(1)
-            elif mightRoll in range(20, 85):
+            elif mightRoll in range(21, 86):
                 return mobLoader(2)
-            elif mightRoll in range(86, 99):
+            elif mightRoll in range(87, 100):
                 return mobLoader(3)
         else:
             return None
@@ -114,11 +126,11 @@ def pickMob(diff, debug=0):
         # Difficulty 4 rooms have 100% spawn rate, so spawnRoll is not considered
         if debug == 1:
             print "Diff: {} \nmightRoll: {} \nspawnRoll: {}".format(diff, mightRoll, spawnRoll)
-        if mightRoll in range(0, 39):
+        if mightRoll in range(1, 40):
             return mobLoader(2)
-        elif mightRoll in range(40, 94):
+        elif mightRoll in range(41, 95):
             return mobLoader(3)
-        elif mightRoll in range(95, 99):
+        elif mightRoll in range(96, 100):
             return mobLoader(4)
 
 

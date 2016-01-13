@@ -32,10 +32,10 @@ class maps(object):
         """
         chance = mechanics.roll100()
         # scaffold for chance events
-        if chance in range(0, 24):
+        if chance in range(1, 25):
             # nothing. 25% chance of no event.
             pass
-        elif chance in range(25, 29):
+        elif chance in range(26, 30):
             if player.chp < player.hp:
                 print "\nThis room has a small fountain containing clean water. You quickly drink it, restoring your health."
                 if (player.chp + 50) <= player.hp:
@@ -46,23 +46,23 @@ class maps(object):
                 print "\nThis room has a small fountain containing clean water. You quickly drink it, but your health is already full."
             print player.showHP()
 
-        elif chance in range(30, 34):
+        elif chance in range(31, 35):
             print "\nAn imp throws a rock at you before disappearing in a puff of smoke."
             player.chp -= 5
             print player.showHP()
 
-        elif chance in range(35, 49):
+        elif chance in range(36, 50):
             pass
 
-        elif chance in (50, 51):
+        elif chance in (51, 52):
             print "\nYou find a piece of armor on the floor in this room. You strap it onto yourself as best you can. You feel more protected. (Armor increased to {}).".format(
                 player.arm + 2)
             player.arm += 2
 
-        elif chance in range(52, 95):
+        elif chance in range(53, 96):
             pass
 
-        elif chance in (96, 97):
+        elif chance in (97, 98):
             # Keep this in mind once levels are implemented
             print "\nA lost spirit appears to you. 'Hail, {}. I perished here, like many before me. I give you my blessing, that you may find freedom again'. As the spirit disappears, you feel slightly more healthy. (Health permanently increased to {}).".format(player.name, player.hp + 30)
             player.hp += 30
@@ -72,12 +72,12 @@ class maps(object):
                 player.chp = player.hp
             print player.showHP()
 
-        elif chance == 98:
+        elif chance == 99:
             print "\nYou find a pair of leather shoes to protect your bare feet, allowing you to move slightly more quickly. (Agility increased to {}.)".format(
                 player.agi + 1)
             player.agi += 1
 
-        elif chance == 99:
+        elif chance == 100:
             pass
             # Some very rare event
 
@@ -91,11 +91,11 @@ class maps(object):
         it uses ranges so that chances can be modified easily and is then bucketed for use.
         """
         diffRoll = mechanics.roll100()
-        if diffRoll in range(0, 24):
+        if diffRoll in range(1, 25):
             return 0
-        elif diffRoll in range(25, 74):
+        elif diffRoll in range(26, 75):
             return 1
-        elif diffRoll in range(75, 89):
+        elif diffRoll in range(76, 90):
             return 2
         else:
             return 3
@@ -107,11 +107,11 @@ class maps(object):
         """
         exitsRoll = mechanics.roll100()
         # exits are bucketed similar to difficulty
-        if exitsRoll in range(0, 4):
+        if exitsRoll in range(1, 5):
             return 1
-        elif exitsRoll in range(5, 54):
+        elif exitsRoll in range(6, 55):
             return 2
-        elif exitsRoll in range(55, 89):
+        elif exitsRoll in range(56, 90):
             return 3
         else:
             return 4

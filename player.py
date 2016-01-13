@@ -30,6 +30,19 @@ class player(object):
             roll = self.rollStats()
         return roll
 
+    def attack(self, mob):
+        if self.strg - mob.arm > 1:
+            dmg = self.strg - mob.arm
+        else:
+            dmg = 1
+
+        if dmg > 1:
+            print "You attack the {} for {} damage!\n".format(mob.name, dmg)
+            mob.chp -= dmg
+        else:
+            print "You land an attack, but it doesn't get past the {}'s defences.\n".format(mob.name)
+        self.ap -= 100
+
     def showHP(self):
         """standard format to print players current HP"""
         return "{} HP: {}/{} AP:{}/100".format(self.name, self.chp, self.hp, self.ap)
