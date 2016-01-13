@@ -12,9 +12,6 @@ class player(object):
     will change stats to dictionary in the future
     """
 
-    strg = agi = end = hp = chp = arm = ap = roomCt = 0
-    name = ""
-
     def rollStats(self):
         """
         Desc: generates player stats
@@ -62,6 +59,9 @@ class player(object):
             self.name, self.strg, self.agi, self.end, self.hp, self.arm)
 
     def __init__(self):
+        self.strg = self.agi = self.end = self.hp = self.chp = self.arm = self.ap = self.roomCt = 0
+        self.name = ""
+
         print "Creating character.\n"
 
         while len(self.name) < 1:

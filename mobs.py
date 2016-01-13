@@ -24,8 +24,6 @@ class mob(object):
     mobs should be built with a base agility of 10. Slower than that can cause high agility players to have too easy of a time. Faster than that can be overwhelming. Agility has a major impact on difficulty, due to the way turns happen.
     will make stats a dictionary in the future.
     """
-    strg = agi = end = bdiff = ap = hp = chp = arm = 0
-    name = title = desc = ""
 
     def showHP(self):
         return "{} HP: {}/{} AP:{}/100".format(self.name, self.chp, self.hp, self.ap)
@@ -63,8 +61,10 @@ class mob(object):
         self.strg = stats['strg']
         self.agi = stats['agi']
         self.end = stats['end']
+        self.bdiff = stats['bdiff']
         self.name = name
         self.desc = desc
+        self.ap = self.hp = self.chp = self.arm = 0
         self.calcStats()
 
 

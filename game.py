@@ -21,11 +21,9 @@ def prompt(player, room):
     command = None
     while not command:
         commandFull = raw_input(player.showHP() + ">")
-        command = commandFull.split(' ')[0].lower()
-        try:
-            args = commandFull.split(' ', 1)[1].lower()
-        except:
-            args = None
+        parts = commandFull.lower.split(' ')
+        command = parts[0]
+        args = parts[1:]
     if command in ('1','2','3','4','enter'):
         if command in ('1','2','3','4'):
             command = int(command)
@@ -47,6 +45,7 @@ def prompt(player, room):
         return None
     elif command in ('quit', 'exit'):
         action = actions.quit(player)
+        return None
     elif command in ('stat','stats','status'):
         action = actions.status(player)
         return None
