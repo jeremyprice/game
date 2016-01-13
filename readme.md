@@ -130,6 +130,12 @@ Player will have a character that moves through rooms and randomly encounters mo
 (not implemented)
 - Effect?
 
+- flee: return to last room
+- stomp: reduce mob's AP
+- bide: save your AP
+- kick: lower damage attack, uses less AP. Maybe reduce's mob's AP slightly
+- 
+
 #####+------------------------------------------------------------+
 #####+                          Combat                            +
 #####+------------------------------------------------------------+
@@ -190,3 +196,5 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Add difficulty option
 - Move misc. room descriptions to an external file
 - Add modifiers to rolls ex mechanics.roll20(1) would be the roll +1
+- Add first play tutorial
+- Add game saves

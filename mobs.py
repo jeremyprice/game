@@ -1,14 +1,14 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 __author__ = 'alex barnes'
 
 import mechanics
-import simplejson, random
+import json, random
 
 #load mob data from external json file
 with open('./resources/mobs.json') as mobjson:
-    mobData = simplejson.load(mobjson)
+    mobData = json.load(mobjson)
 
 #initialize empty mob index
 mobIndex = {0:[], 1:[], 2:[], 3:[], 4:[]}
