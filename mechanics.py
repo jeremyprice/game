@@ -21,6 +21,12 @@ def roll20(bonus = 0):
     except TypeError:
         return None
 
+def roll2(bonus = 0):
+    try:
+        int(bonus)
+        return random.randint(1,2) + bonus
+    except TypeError:
+        return None
 
 
 def main():

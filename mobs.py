@@ -44,7 +44,7 @@ class mob(object):
 
     def attack(self, player):
         if self.strg - player.arm > 1:
-            dmg = player.strg - self.arm
+            dmg = self.strg - player.arm
         else:
             dmg = 1
         if dmg > 1:
@@ -52,6 +52,7 @@ class mob(object):
             player.chp -= dmg
         else:
             print "The {} lands a glancing blow!\n".format(self.name)
+            player.chp -= 1
         self.ap -= 100
 
     def __init__(self, stats, name, desc):

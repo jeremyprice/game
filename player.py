@@ -38,6 +38,7 @@ class player(object):
             mob.chp -= dmg
         else:
             print "You land an attack, but it doesn't get past the {}'s defences.\n".format(mob.name)
+            mob.chp -= 1
         self.ap -= 100
 
     def showHP(self):

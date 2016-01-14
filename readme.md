@@ -198,3 +198,4 @@ Player will have a character that moves through rooms and randomly encounters mo
 - Add modifiers to rolls ex mechanics.roll20(1) would be the roll +1
 - Add first play tutorial
 - Add game saves
+- Add merchant (after items and inventory)

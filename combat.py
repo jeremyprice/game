@@ -5,6 +5,7 @@ __author__ = 'alex barnes'
 
 import random
 from time import sleep
+import mechanics
 
 
 def combat(player, mob):
@@ -23,10 +24,14 @@ def combat(player, mob):
         elif player.ap >= 100 and mob.ap >= 100:
             if player.agi > mob.agi:
                 player.attack(mob)
-            elif player.agi <= mob.agi:
+            elif player.agi < mob.agi:
                 mob.attack(player)
             else:
-                random.choice(player.attack(mob), mob.attack(player))
+                if mechanics.roll2() == 1:
+                    player.attack(mob)
+                else:
+                    mob.attack(player)
+
     if mob.chp <= 0:
         print "You have killed the {}!\n".format(mob.name)
         player.ap = 0
