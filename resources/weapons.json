@@ -1,0 +1,50 @@
+[
+{
+	"name" : "",
+	"desc" : "",
+	"value" : 0,
+	"special" : [],
+	"rarity" : 0,
+	"keyword" : [],
+	"location" : 0,
+	"damage" : 1,
+	"strgReq" : 0,
+	"weight" : 0
+},
+{
+	"name" : "Rusty steel sword",
+	"desc" : "An old battered and chipped sword, rusting badly",
+	"value" : 2,
+	"special" : [],
+	"rarity" : 0,
+	"keyword" : ["rusty", "sword"],
+	"location" : 1,
+	"damage" : 2,
+	"strgReq" : 2,
+	"weight" : 0
+},
+{
+	"name" : "Rusty longsword",
+	"desc" : "An old battered and chipped longsword, rusting badly",
+	"value" : 3,
+	"special" : [],
+	"rarity" : 1,
+	"keyword" : ["rusty", "longsword"],
+	"location" : 2,
+	"damage" : 5,
+	"strgReq" : 10,
+	"weight" : 1
+},
+{
+	"name" : "Battered oak shield",
+	"desc" : "An old oaken shield, battered and splintered",
+	"value" : 2,
+	"special" : [],
+	"rarity" : 2,
+	"keyword" : ["battered", "oak", "shield"],
+	"location" : 3,
+	"damage" : 3,
+	"strgReq" : 7,
+	"weight" : 1
+}
+]

@@ -120,25 +120,18 @@ Player will have a character that moves through rooms and randomly encounters mo
 #####+                          Items                             +
 #####+------------------------------------------------------------+
 (not implemented)
-- Stats
-- Location worn
-- Use
+
 
 #####+------------------------------------------------------------+
 #####+                          Skills                            +
 #####+------------------------------------------------------------+
 (not implemented)
-- Effect?
 
-- flee: return to last room
-- stomp: reduce mob's AP
-- bide: save your AP
-- kick: lower damage attack, uses less AP. Maybe reduce's mob's AP slightly
-- 
 
 #####+------------------------------------------------------------+
 #####+                          Combat                            +
 #####+------------------------------------------------------------+
++ Imports mechanics
 + Imports random, time
 + Imported by game 
 
@@ -182,20 +175,3 @@ Player will have a character that moves through rooms and randomly encounters mo
         - Fight monster until either the monster of player's HP reaches < 1
         - Chance event, if any, takes place
         - Player selects next room
-        
-        
-###### To do:
-- Add skills
-- Add classes
-- Add races
-- Add levels
-- Add monster titles
-- Add items and inventory
-- Add weapons
-- Increase difficulty based on roomCt
-- Add difficulty option
-- Move misc. room descriptions to an external file
-- Add modifiers to rolls ex mechanics.roll20(1) would be the roll +1
-- Add first play tutorial
-- Add game saves
-- Add merchant (after items and inventory)
